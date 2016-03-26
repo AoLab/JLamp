@@ -79,3 +79,6 @@ local.properties
 # Code Recommenders
 .recommenders/
 
+### KAA ###
+key.private
+key.public
