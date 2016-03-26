@@ -57,6 +57,8 @@ public class Main {
 			OutputStream outputStream = exchange.getResponseBody();
 			outputStream.write(response.getBytes());
 			outputStream.close();
+			
+			sendToAll(getInterval(query));
 		}
 
 		public int getInterval(String query) {
@@ -118,8 +120,8 @@ public class Main {
 					// Some code
 				}
 			});
-
-			timeIntervalEvent.sendEventToAll(new time_interval(10));
+			
+			timeIntervalEvent.sendEventToAll(new time_interval(timeInterval));
 
 		}
 	}
