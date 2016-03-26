@@ -19,26 +19,26 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
-	
+
 	static class CustomHttpHandler implements HttpHandler {
 
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			String query = exchange.getRequestURI().getQuery();
-			
+
 			int interval = getInterval(query);
-			String response = "Your requested time interval was sent to kaa: interval is " + interval + " seconds";
+			String response = "Your requested time interval was sent to kaa: interval is " + interval + " second(s)";
 			exchange.sendResponseHeaders(200, response.length());
 
 			OutputStream outputStream = exchange.getResponseBody();
 			outputStream.write(response.getBytes());
 			outputStream.close();
 		}
-		
+
 		public int getInterval(String query){
 			return Integer.valueOf(query.split("=")[1]);
 		}
-		
+
 	}
-	
+
 }
