@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Notification",
+    "type": "object",
+
+    "properties": {
+        "interval":{
+            "description":"The time interval for lamp to be turned on.",
+            "type":"integer"
+        }
+    },
+
+    "required": "interval"
+}
