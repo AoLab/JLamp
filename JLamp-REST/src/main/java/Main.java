@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 80),30);
-			server.createContext("/lamp/Onl", new MyHandler());
+			server.createContext("/lamp/Onl", new CustomHttpHandler());
 			server.setExecutor(null);
 			server.start();
 		} catch (IOException e) {
@@ -20,15 +20,23 @@ public class Main {
 		}
 	}
 	
-	static class MyHandler implements HttpHandler {
+	static class CustomHttpHandler implements HttpHandler {
 
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
-			String response = "This is the response";
+			String query = exchange.getRequestURI().getQuery();
+			
+			int interval = getInterval(query);
+			String response = "Your requested time interval was sent to kaa: interval is " + interval + " seconds";
 			exchange.sendResponseHeaders(200, response.length());
-			OutputStream os = exchange.getResponseBody();
-			os.write(response.getBytes());
-			os.close();
+
+			OutputStream outputStream = exchange.getResponseBody();
+			outputStream.write(response.getBytes());
+			outputStream.close();
+		}
+		
+		public int getInterval(String query){
+			return Integer.valueOf(query.split("=")[1]);
 		}
 		
 	}
