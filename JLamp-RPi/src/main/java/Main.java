@@ -46,9 +46,7 @@ public class Main {
 
 			@Override
 			public void onNotification(String topicId, Lamp notification) {
-				LOG.info("Received notification {} for topic with id {}", notification, topicId);
-				// TODO Auto-generated method stub
-				
+				LOG.info("Received notification {} for topic with id {}", notification, topicId);				
 			}
         });
  
