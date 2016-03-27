@@ -24,6 +24,13 @@
                 <active>true</active>
             </properties>
         </developer>
+        <developer>
+            <name>Parham Alvani</name>
+            <email>parham.alvani@gmail.com</email>
+            <properties>
+                <active>true</active>
+            </properties>
+        </developer>
     </developers>
 
     <build>
