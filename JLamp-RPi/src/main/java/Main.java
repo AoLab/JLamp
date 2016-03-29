@@ -18,15 +18,15 @@ import org.slf4j.LoggerFactory;
 import ir.ac.aut.ceit.aolab.jlamp.time_interval;
 import ir.ac.aut.ceit.aolab.lamp.Lamp;
 import ir.ac.aut.ceit.aolab.timeintervalevent.TimeIntervalEvent;
- 
+
 public class Main {
- 
+
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
- 
+
     public static void main(String[] args) {
         new Main().launch();
     }
- 
+
     private void launch() {
         // Create client for Kaa SDK
         KaaClient kaaClient = Kaa.newClient(new DesktopKaaPlatformContext(),
@@ -36,7 +36,7 @@ public class Main {
                         LOG.info("Kaa SDK client started!");
                     }
                 });
- 
+
         // Registering listener for topic updates
         kaaClient.addTopicListListener(new NotificationTopicListListener() {
             @Override
@@ -47,40 +47,40 @@ public class Main {
                 }
             }
         });
- 
+
         // Registering listener for notifications
         kaaClient.addNotificationListener(new NotificationListener() {
 
-			@Override
-			public void onNotification(String topicId, Lamp notification) {
-				LOG.info("Received notification {} for topic with id {}", notification, topicId);				
-			}
+            @Override
+            public void onNotification(String topicId, Lamp notification) {
+                LOG.info("Received notification {} for topic with id {}", notification, topicId);
+            }
         });
- 
+
         // Starts Kaa SDK client
         kaaClient.start();
-        
-    	kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
-			@Override
-			public void onAttachResult(UserAttachResponse response) {
-				System.out.println("Attach response" + response.getResult());
-			}
-		});
 
-		List<String> FQNs = new LinkedList<>();
-		FQNs.add(TimeIntervalEvent.class.getName());
+        kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
+            @Override
+            public void onAttachResult(UserAttachResponse response) {
+                System.out.println("Attach response" + response.getResult());
+            }
+        });
 
-		kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
-			@Override
-			public void onEventListenersReceived(List<String> eventListeners) {
-				System.out.println("I recieved an event!!!");
-			}
+        List<String> FQNs = new LinkedList<>();
+        FQNs.add(time_interval.class.getName());
 
-			@Override
-			public void onRequestFailed() {
-				// Some code
-			}
-		});
+        kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
+            @Override
+            public void onEventListenersReceived(List<String> eventListeners) {
+                System.out.println("I recieved an event!!!");
+            }
+
+        @Override
+        public void onRequestFailed() {
+            // Some code
+        }
+        });
 
     }
 }
