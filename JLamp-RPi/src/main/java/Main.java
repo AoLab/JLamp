@@ -68,7 +68,7 @@ public class Main {
 		});
 
 		List<String> FQNs = new LinkedList<>();
-		FQNs.add(time_interval.class.getName());
+		FQNs.add(TimeIntervalEvent.class.getName());
 
 		kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
 			@Override

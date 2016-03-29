@@ -122,7 +122,6 @@ public class Main {
 			});
 			
 			timeIntervalEvent.sendEventToAll(new time_interval(timeInterval));
-
 		}
 	}
 
