@@ -23,6 +23,8 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+import ir.ac.aut.ceit.iot.lamp.onlampinteraval.onLampInterval;
+
 
 public class Main {
 
@@ -84,13 +86,12 @@ public class Main {
 
 			// Registering listener for notifications
 			kaaClient.addNotificationListener(new NotificationListener() {
-
+				
 				@Override
-				public void onNotification(String topicId,onLampInterval notification) {
-					LOG.info("Received notification {} for topic with id {}", notification, topicId);
+				public void onNotification(long topicId, onLampInterval notification) {
+					LOG.info("Received notification {} for topic with id {}", notification, topicId);					
 				}
 			});
-
 			// Starts Kaa SDK client
 			kaaClient.start();
 
@@ -123,3 +124,4 @@ public class Main {
 	}
 
 }
+	
