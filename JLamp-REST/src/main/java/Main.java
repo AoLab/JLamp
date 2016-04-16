@@ -35,6 +35,7 @@ public class Main {
 			HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8090), 30);
 
 			server.createContext("/lamp/Onl", new CustomHttpHandler());
+			server.createContext("/lamp/list", new CustomHttpHandler());
 			server.start();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
