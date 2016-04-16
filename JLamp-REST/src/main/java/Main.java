@@ -32,7 +32,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-			HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8090), 30);
+			HttpServer server = HttpServer.create(new InetSocketAddress("192.168.128.90", 4500), 30);
 
 			server.createContext("/lamp/Onl", new CustomHttpHandler());
 			server.start();
@@ -86,10 +86,10 @@ public class Main {
 
 			// Registering listener for notifications
 			kaaClient.addNotificationListener(new NotificationListener() {
-				
+
 				@Override
 				public void onNotification(long topicId, onLampInterval notification) {
-					LOG.info("Received notification {} for topic with id {}", notification, topicId);					
+					LOG.info("Received notification {} for topic with id {}", notification, topicId);
 				}
 			});
 			// Starts Kaa SDK client
@@ -124,4 +124,4 @@ public class Main {
 	}
 
 }
-	
+
