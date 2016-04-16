@@ -23,9 +23,6 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
-import ir.ac.aut.ceit.aolab.jlamp.time_interval;
-import ir.ac.aut.ceit.aolab.lamp.Lamp;
-import ir.ac.aut.ceit.aolab.timeintervalevent.TimeIntervalEvent;
 
 public class Main {
 
@@ -33,7 +30,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-			HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 80), 30);
+			HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8090), 30);
 
 			server.createContext("/lamp/Onl", new CustomHttpHandler());
 			server.start();
@@ -57,7 +54,7 @@ public class Main {
 			OutputStream outputStream = exchange.getResponseBody();
 			outputStream.write(response.getBytes());
 			outputStream.close();
-			
+
 			sendToAll(getInterval(query));
 		}
 
@@ -89,7 +86,7 @@ public class Main {
 			kaaClient.addNotificationListener(new NotificationListener() {
 
 				@Override
-				public void onNotification(String topicId, Lamp notification) {
+				public void onNotification(String topicId,onLampInterval notification) {
 					LOG.info("Received notification {} for topic with id {}", notification, topicId);
 				}
 			});
@@ -97,31 +94,31 @@ public class Main {
 			// Starts Kaa SDK client
 			kaaClient.start();
 
-			kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
-				@Override
-				public void onAttachResult(UserAttachResponse response) {
-					System.out.println("Attach response" + response.getResult());
-				}
-			});
+	//		kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
+	//			@Override
+	//			public void onAttachResult(UserAttachResponse response) {
+	//				System.out.println("Attach response" + response.getResult());
+	//			}
+	//		});
 
-			EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
-			TimeIntervalEvent timeIntervalEvent = eventFamilyFactory.getTimeIntervalEvent();
-			List<String> FQNs = new LinkedList<>();
-			FQNs.add(time_interval.class.getName());
+	//		EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+	//		TimeIntervalEvent timeIntervalEvent = eventFamilyFactory.getTimeIntervalEvent();
+	//		List<String> FQNs = new LinkedList<>();
+	//		FQNs.add(time_interval.class.getName());
 
-			kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
-				@Override
-				public void onEventListenersReceived(List<String> eventListeners) {
-					System.out.println("I recieved an event!!!");
-				}
+	//		kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
+	//			@Override
+	//			public void onEventListenersReceived(List<String> eventListeners) {
+	//				System.out.println("I recieved an event!!!");
+	//			}
 
-				@Override
-				public void onRequestFailed() {
-					// Some code
-				}
-			});
-			
-			timeIntervalEvent.sendEventToAll(new time_interval(timeInterval));
+	//			@Override
+	//			public void onRequestFailed() {
+	//				// Some code
+	//			}
+	//		});
+
+	//		timeIntervalEvent.sendEventToAll(new time_interval(timeInterval));
 		}
 	}
 
