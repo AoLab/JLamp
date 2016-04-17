@@ -33,6 +33,7 @@ public class CustomHttpHandler implements HttpHandler{
 	public void handle(HttpExchange exchange) throws IOException {
 
 		String method = exchange.getRequestMethod();
+		exchange.getRequestBody();
 		System.out.println(method);
 		
 		switch(method) {
@@ -43,11 +44,6 @@ public class CustomHttpHandler implements HttpHandler{
 		case "":
 			break;
 		}
-
-//		String response = "Your requested time interval was sent to kaa: interval is " + interval + " second(s)";
-//		exchange.sendResponseHeaders(200, response.length());
-		
-		
 
 		OutputStream outputStream = exchange.getResponseBody();
 //		outputStream.write(response.getBytes());
