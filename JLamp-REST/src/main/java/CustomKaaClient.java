@@ -15,6 +15,7 @@ public class CustomKaaClient {
     private KaaClient kaaClient;
 
     private CustomKaaClient() {
+
         kaaClient = Kaa.newClient(new DesktopKaaPlatformContext(), new SimpleKaaClientStateListener() {
 
             @Override
@@ -26,6 +27,8 @@ public class CustomKaaClient {
         });
 
         kaaClient.addNotificationListener(new CustomNotificationListener());
+
+        kaaClient.start();
     }
 
     public static CustomKaaClient getKaaClient() {

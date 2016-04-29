@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
 
 public class CustomHttpHandler implements HttpHandler {
@@ -33,6 +32,10 @@ public class CustomHttpHandler implements HttpHandler {
                 exchange.sendResponseHeaders(501, Constants.code501.length());
                 exchange.getResponseBody().write(Constants.code501.getBytes());
                 break;
+            case "/lamp/OnI":
+                exchange.sendResponseHeaders(501, Constants.code501.length());
+                exchange.getResponseBody().write(Constants.code501.getBytes());
+                break;
             default:
                 exchange.sendResponseHeaders(404, Constants.code404.length());
                 exchange.getResponseBody().write(Constants.code404.getBytes());
@@ -43,27 +46,6 @@ public class CustomHttpHandler implements HttpHandler {
 
     public void sendToAll(int timeInterval) {
 
-        // Registering listener for topic updates
-        //   kaaClient.addTopicListListener(new NotificationTopicListListener() {
-//            @Override
-//            public void onListUpdated(List<Topic> topicList) {
-//                LOG.info("Topic list updated!");
-//                for (Topic topic : topicList) {
-//                    LOG.info("Received topic with id {} and name {}", topic.getId(), topic.getName());
-//                }
-//            }
-//        });
-
-        // Registering listener for notifications
-        //  kaaClient.addNotificationListener(new NotificationListener() {
-
-        //      @Override
-        //      public void onNotification(long topicId, onLampInterval notification) {
-        //          LOG.info("Received notification {} for topic with id {}", notification, topicId);
-        //      }
-        //  });
-        //  // Starts Kaa SDK client
-        //  kaaClient.start();
 
         //  kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
         //      @Override
