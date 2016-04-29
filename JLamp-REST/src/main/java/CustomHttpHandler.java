@@ -10,7 +10,7 @@ import java.io.OutputStream;
 
 public class CustomHttpHandler implements HttpHandler {
 
-    public final Logger LOG = LoggerFactory.getLogger(Main.class);
+    public final Logger LOG = LoggerFactory.getLogger(CustomHttpHandler.class);
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -41,18 +41,7 @@ public class CustomHttpHandler implements HttpHandler {
         exchange.getResponseBody().close();
     }
 
-    public int getInterval(String query) {
-        return Integer.valueOf(query.split("=")[1]);
-    }
-
     public void sendToAll(int timeInterval) {
-        //   KaaClient kaaClient = Kaa.newClient(new DesktopKaaPlatformContext(), new SimpleKaaClientStateListener() {
-
-        //       @Override
-        //       public void onStarted() {
-        //           LOG.info("Kaa SDK client started!");
-        //       }
-//        });
 
         // Registering listener for topic updates
         //   kaaClient.addTopicListListener(new NotificationTopicListListener() {
