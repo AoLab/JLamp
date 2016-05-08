@@ -53,18 +53,17 @@ public class CustomKaaClient {
         return instance;
     }
 
-    public void sendOnIEvent(String id, int command) {
+    public void sendOnIEvent(OnIEvent onIEvent) {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-        lampEventFamily.sendEventToAll(new OnIEvent(id, command));
+        lampEventFamily.sendEventToAll(onIEvent);
     }
 
-    public void sendTurnEvent(String id, boolean status) {
+    public void sendTurnEvent(TurnEvent turnEvent) {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-        lampEventFamily.sendEventToAll(new TurnEvent(id, status));
+        lampEventFamily.sendEventToAll(turnEvent);
     }
 
-    }
 
 }

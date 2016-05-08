@@ -14,8 +14,8 @@ public class Main {
 		try {
 			HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 4500), 30);
 
-			server.createContext("/lamp/", new CustomHttpHandler());
-			server.start();
+            server.createContext("/lamp/", new CustomHttpHandler(CustomKaaClient.getKaaClient()));
+            server.start();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -4,12 +4,20 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class CustomHttpHandler implements HttpHandler {
 
     public final Logger LOG = LoggerFactory.getLogger(CustomHttpHandler.class);
+    private CustomKaaClient kaaClient;
+
+    public CustomHttpHandler(CustomKaaClient kaaClient) {
+        this.kaaClient = kaaClient;
+    }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -19,9 +27,9 @@ public class CustomHttpHandler implements HttpHandler {
         switch (context) {
             case "/lamp/turn":
                 try {
-                    Parser.getInterval(context);
                     exchange.sendResponseHeaders(200, Constants.code200.length());
                     exchange.getResponseBody().write(Constants.code200.getBytes());
+                    kaaClient.sendTurnEvent(Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody())));
                 } catch (ParseException e) {
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
@@ -33,8 +41,15 @@ public class CustomHttpHandler implements HttpHandler {
                 exchange.getResponseBody().write(Constants.code501.getBytes());
                 break;
             case "/lamp/OnI":
-                exchange.sendResponseHeaders(501, Constants.code501.length());
-                exchange.getResponseBody().write(Constants.code501.getBytes());
+                exchange.sendResponseHeaders(200, Constants.code200.length());
+                exchange.getResponseBody().write(Constants.code200.getBytes());
+                try {
+                    kaaClient.sendOnIEvent(Parser.getOnIEvent(readFromInputStream(exchange.getRequestBody())));
+                } catch (ParseException e) {
+                    exchange.sendResponseHeaders(400, Constants.code400.length());
+                    exchange.getResponseBody().write(Constants.code400.getBytes());
+                    e.printStackTrace();
+                }
                 break;
             default:
                 exchange.sendResponseHeaders(404, Constants.code404.length());
@@ -44,34 +59,24 @@ public class CustomHttpHandler implements HttpHandler {
         exchange.getResponseBody().close();
     }
 
-    public void sendToAll(int timeInterval) {
+    private String readFromInputStream(InputStream inputStream) {
+        String ans = "";
+        String read;
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            while ((read = br.readLine()) != null) {
+                ans += read;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-
-        //  kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
-        //      @Override
-        //      public void onAttachResult(UserAttachResponse response) {
-        //          System.out.println("Attach response" + response.getResult());
-        //      }
-        //  });
-
-        //  EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
-        //  lamp_event_family lamp = eventFamilyFactory.getlamp_event_family();
-        //  List<String> FQNs = new LinkedList<>();
-        //  FQNs.add(lamp_event_family.class.getName());
-
-        //  kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
-        //      @Override
-        //      public void onEventListenersReceived(List<String> eventListeners) {
-        //          System.out.println("I recieved an event!!!");
-        //      }
-
-        //      @Override
-        //           public void onRequestFailed() {
-        // Some code
-        //         }
-        // });
-
-        // lamp.sendEventToAll(new turn(true));
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ans;
     }
 
 }
