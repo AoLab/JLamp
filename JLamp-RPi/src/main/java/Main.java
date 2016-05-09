@@ -1,5 +1,3 @@
-import gnu.io.CommPortIdentifier;
-import org.apache.avro.mapred.AvroJob;
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
 import org.kaaproject.kaa.client.KaaClient;
@@ -25,6 +23,7 @@ public class Main {
         Serial serial = new Serial();
         try {
             serial.connect("/dev/tnt0");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
