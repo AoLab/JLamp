@@ -23,7 +23,7 @@ public class Main {
         Serial serial = new Serial();
         try {
             serial.connect("/dev/tnt0");
-
+            serial.write("Salam");
         } catch (Exception e) {
             e.printStackTrace();
         }
