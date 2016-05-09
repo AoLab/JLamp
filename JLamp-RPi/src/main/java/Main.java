@@ -1,3 +1,5 @@
+import gnu.io.CommPortIdentifier;
+import org.apache.avro.mapred.AvroJob;
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
 import org.kaaproject.kaa.client.KaaClient;
@@ -9,6 +11,7 @@ import org.kaaproject.kaa.common.endpoint.gen.UserAttachResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Enumeration;
 import java.util.List;
 
 
@@ -18,7 +21,13 @@ public class Main {
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        new Main().launch();
+        // new Main().launch();
+        Serial serial = new Serial();
+        try {
+            serial.connect("/dev/tnt0");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void launch() {
@@ -43,7 +52,7 @@ public class Main {
         });
 
         // Registering listener for notifications
-        kaaClient.addNotificationListener();
+        //kaaClient.addNotificationListener();
 
         // Starts Kaa SDK client
         kaaClient.start();
