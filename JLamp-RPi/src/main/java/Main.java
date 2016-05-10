@@ -22,8 +22,14 @@ public class Main {
         // new Main().launch();
         Serial serial = new Serial();
         try {
-            serial.connect("/dev/tnt0");
-            serial.write("Salam");
+            serial.connect("/dev/ttyACM0");
+            while(true) {
+                serial.write("L111\n");
+                Thread.sleep(500);
+                serial.write("L110\n");
+                Thread.sleep(500);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
