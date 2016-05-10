@@ -31,7 +31,7 @@ public class Serial {
             if ( commPort instanceof SerialPort)
             {
                 SerialPort serialPort = (SerialPort) commPort;
-                serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.PARITY_EVEN, SerialPort.STOPBITS_1);
+                serialPort.setSerialPortParams(115200, SerialPort.DATABITS_8, SerialPort.PARITY_EVEN, SerialPort.FLOWCONTROL_NONE);
                 System.out.println(serialPort.getBaudRate());
 
                 printWriter = new PrintWriter(serialPort.getOutputStream());
@@ -47,6 +47,11 @@ public class Serial {
     public void write(String string) {
         printWriter.write(string);
         printWriter.flush();
+    }
+
+    public void close() throws IOException {
+        printWriter.close();
+        bufferedReader.close();
     }
 
 }
