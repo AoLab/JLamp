@@ -1,0 +1,16 @@
+[INFO] Scanning for projects...
+[INFO] Searching repository for plugin with prefix: 'exec'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Lamp
+[INFO]    task-segment: [exec:java]
+[INFO] ------------------------------------------------------------------------
+[INFO] [exec:java {execution: default-cli}]
+[INFO] -----------------------------Recieved
+Recieved
+-------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1 second
+[INFO] Finished at: Wed May 11 11:18:42 IRDT 2016
+[INFO] Final Memory: 12M/106M
+[INFO] ------------------------------------------------------------------------

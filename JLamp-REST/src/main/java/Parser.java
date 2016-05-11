@@ -14,7 +14,7 @@ public class Parser {
         OnIEvent onIEvent;
         JSONObject jsonObject = (JSONObject) parser.parse(input);
         String id = (String) jsonObject.get("id");
-        Integer interval = Integer.parseInt(String.valueOf(jsonObject.get("command")));
+        Integer interval = (Integer) jsonObject.get("command");
         onIEvent = new OnIEvent(id, interval);
         return onIEvent;
     }
