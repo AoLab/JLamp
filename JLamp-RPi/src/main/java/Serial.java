@@ -11,11 +11,21 @@ public class Serial {
 
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
+    private static Serial serialInstance;
 
-    public Serial()
+    private Serial()
     {
         super();
+        serialInstance = this;
     }
+
+    public static Serial getSerialInstance() {
+        if(serialInstance == null)
+            new Serial();
+        return serialInstance;
+    }
+
+
 
     void connect ( String portName ) throws Exception
     {
@@ -42,6 +52,10 @@ public class Serial {
                 System.out.println("Error: Only serial ports are handled by this example.");
             }
         }
+    }
+
+    public void sendLampCommand(String id, int status) {
+        write("L" + id + status);
     }
 
     public void write(String string) {
