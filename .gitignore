@@ -136,4 +136,6 @@ state.properties
 state.properties_bckp
 key.private
 key.public
+log.txt
+log2.txt
 
