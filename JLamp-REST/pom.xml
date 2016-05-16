@@ -42,7 +42,7 @@
     <dependencies>
         <dependency>
             <groupId>ir.ac.aut.ceit.aolab.jlamp</groupId>
-            <artifactId>kaa-sdk-java</artifactId>
+            <artifactId>kaa-sdk-java-rest</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
