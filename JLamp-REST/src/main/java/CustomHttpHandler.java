@@ -48,8 +48,8 @@ public class CustomHttpHandler implements HttpHandler {
                     LOG.info("\n\nRecieved!!!!!!!!!!!!!!!!!\n\n");
                     String ans = readFromInputStream(exchange.getRequestBody());
                     LOG.info("\n\n"+ans+"\n\n");
-                        kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
-                    LOG.info("\n\nRecieved!!!!!!!!!!!!!!!!!\n\n");
+                    kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
+                    LOG.info("\n\nFINALLLLLLLLL\n");
                 } catch (ParseException e) {
                     LOG.info("\n\nNOT Recieved!!!!!!!!!!!!!!!!!\n\n");
                     exchange.sendResponseHeaders(400, Constants.code400.length());

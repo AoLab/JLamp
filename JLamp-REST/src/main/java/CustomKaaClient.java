@@ -32,7 +32,17 @@ public class CustomKaaClient {
 
         });
 
-
+        kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
+            @Override
+            public void onEventListenersReceived(List<String> eventListeners) {
+                System.out.println("Events:");
+                System.out.println(eventListeners);
+            }
+        @Override
+        public void onRequestFailed() {
+            // Some code
+        }
+        });
         kaaClient.addNotificationListener(new CustomNotificationListener());
 
         kaaClient.start();

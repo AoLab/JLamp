@@ -131,3 +131,9 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 
+# Kaa files
+state.properties
+state.properties_bckp
+key.private
+key.public
+
