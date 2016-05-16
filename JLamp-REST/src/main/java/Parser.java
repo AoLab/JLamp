@@ -14,8 +14,11 @@ public class Parser {
         OnIEvent onIEvent;
         JSONObject jsonObject = (JSONObject) parser.parse(input);
         String id = (String) jsonObject.get("id");
-        Integer interval = (Integer) jsonObject.get("command");
-        onIEvent = new OnIEvent(id, interval);
+        System.out.println(id);
+        long interval = (long) jsonObject.get("command");
+        int intVersion = Math.toIntExact(interval);
+        System.out.println(interval);
+        onIEvent = new OnIEvent(id, intVersion);
         return onIEvent;
     }
 

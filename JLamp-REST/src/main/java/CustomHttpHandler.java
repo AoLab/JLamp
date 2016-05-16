@@ -43,10 +43,15 @@ public class CustomHttpHandler implements HttpHandler {
             case "/lamp/OnI":
                 exchange.sendResponseHeaders(200, Constants.code200.length());
                 exchange.getResponseBody().write(Constants.code200.getBytes());
+                LOG.info("\n\nIM HERE!!!!!!!!!!!!!!!!!\n\n");
                 try {
-                    kaaClient.sendOnIEvent(Parser.getOnIEvent(readFromInputStream(exchange.getRequestBody())));
-                    System.out.println("Recieved");
+                    LOG.info("\n\nRecieved!!!!!!!!!!!!!!!!!\n\n");
+                    String ans = readFromInputStream(exchange.getRequestBody());
+                    LOG.info("\n\n"+ans+"\n\n");
+                        kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
+                    LOG.info("\n\nRecieved!!!!!!!!!!!!!!!!!\n\n");
                 } catch (ParseException e) {
+                    LOG.info("\n\nNOT Recieved!!!!!!!!!!!!!!!!!\n\n");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
                     e.printStackTrace();
