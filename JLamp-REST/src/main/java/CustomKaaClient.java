@@ -44,6 +44,7 @@ public class CustomKaaClient {
 //        }
 //        });
 //        kaaClient.addNotificationListener(new CustomNotificationListener());
+        kaaClient.start();
         kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
             @Override
             public void onAttachResult(UserAttachResponse response) {
@@ -51,7 +52,7 @@ public class CustomKaaClient {
             }
         });
 
-        kaaClient.start();
+
     }
 
     public static CustomKaaClient getKaaClient() {
