@@ -55,7 +55,9 @@ public class Serial {
     }
 
     public void sendLampCommand(String id, int status) {
+        System.out.println("L" + id + status + '\n');
         write("L" + id + status + '\n');
+
     }
 
     public void write(String string) {

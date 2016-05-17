@@ -15,7 +15,8 @@ public class CustomEventListener implements LampEventFamily.Listener {
     public void onEvent(OnIEvent onIEvent, String s) {
         Serial.getSerialInstance().sendLampCommand(onIEvent.getId(), 1);
         try {
-            Thread.sleep(onIEvent.getCommand());
+            System.out.println(onIEvent.getCommand());
+            Thread.sleep(onIEvent.getCommand()*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

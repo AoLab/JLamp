@@ -32,19 +32,8 @@ public class CustomKaaClient {
 
         });
 
-//        kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
-//            @Override
-//            public void onEventListenersReceived(List<String> eventListeners) {
-//                System.out.println("Events:");
-//                System.out.println(eventListeners);
-//            }
-//        @Override
-//        public void onRequestFailed() {
-        // Some code
-//        }
-//        });
-//        kaaClient.addNotificationListener(new CustomNotificationListener());
         kaaClient.start();
+
         kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
             @Override
             public void onAttachResult(UserAttachResponse response) {
@@ -67,7 +56,6 @@ public class CustomKaaClient {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
         lampEventFamily.sendEventToAll(onIEvent);
-        LOG.info("\n\nI'm in END\n\n");
     }
 
     public void sendTurnEvent(TurnEvent turnEvent) {
