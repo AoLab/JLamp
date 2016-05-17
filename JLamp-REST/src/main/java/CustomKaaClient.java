@@ -40,10 +40,16 @@ public class CustomKaaClient {
 //            }
 //        @Override
 //        public void onRequestFailed() {
-            // Some code
+        // Some code
 //        }
 //        });
 //        kaaClient.addNotificationListener(new CustomNotificationListener());
+        kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
+            @Override
+            public void onAttachResult(UserAttachResponse response) {
+                System.out.println("Attach response" + response.getResult());
+            }
+        });
 
         kaaClient.start();
     }
