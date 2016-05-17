@@ -57,18 +57,16 @@ public class CustomKaaClient {
     }
 
     public void sendOnIEvent(OnIEvent onIEvent) {
-        LOG.info("\n\nI'm in ONI\n\n");
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-        LOG.info("\n\nI'm in MID\n\n");
-//        lampEventFamily.sendEventToAll(onIEvent);
+        lampEventFamily.sendEventToAll(onIEvent);
         LOG.info("\n\nI'm in END\n\n");
     }
 
     public void sendTurnEvent(TurnEvent turnEvent) {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-//        lampEventFamily.sendEventToAll(turnEvent);
+        lampEventFamily.sendEventToAll(turnEvent);
     }
 
 
