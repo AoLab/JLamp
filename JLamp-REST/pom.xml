@@ -56,10 +56,5 @@
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
-        <dependency>
-            <groupId>ir.ac.aut.ceit.aolab.jlamp</groupId>
-            <artifactId>kaa-sdk-java-rpi</artifactId>
-            <version>RELEASE</version>
-        </dependency>
     </dependencies>
 </project>
