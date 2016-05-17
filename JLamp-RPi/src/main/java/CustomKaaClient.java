@@ -57,19 +57,9 @@ public class CustomKaaClient {
         FQNs.add(OnIEvent.class.getName());
 
    
-        lampEventFamily.addListener(new LampEventFamily.Listener() {
-            @Override
-            public void onEvent(TurnEvent turnEvent, String s) {
+        lampEventFamily.addListener(new CustomEventListener());
 
-            }
-
-            @Override
-            public void onEvent(OnIEvent onIEvent, String s) {
-                LOG.info("RECEIIIIIIIIIIIIIEVED!");
-                Serial.getSerialInstance().sendLampCommand(onIEvent.getId(),onIEvent.getCommand());
-            }
-
-        });
+        kaaClient.addNotificationListener(new CustomNotificationListener());
 
     }
 

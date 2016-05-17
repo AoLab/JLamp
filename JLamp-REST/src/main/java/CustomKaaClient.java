@@ -32,18 +32,18 @@ public class CustomKaaClient {
 
         });
 
-        kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
-            @Override
-            public void onEventListenersReceived(List<String> eventListeners) {
-                System.out.println("Events:");
-                System.out.println(eventListeners);
-            }
-        @Override
-        public void onRequestFailed() {
+//        kaaClient.findEventListeners(FQNs, new FindEventListenersCallback() {
+//            @Override
+//            public void onEventListenersReceived(List<String> eventListeners) {
+//                System.out.println("Events:");
+//                System.out.println(eventListeners);
+//            }
+//        @Override
+//        public void onRequestFailed() {
             // Some code
-        }
-        });
-        kaaClient.addNotificationListener(new CustomNotificationListener());
+//        }
+//        });
+//        kaaClient.addNotificationListener(new CustomNotificationListener());
 
         kaaClient.start();
     }
@@ -61,14 +61,14 @@ public class CustomKaaClient {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
         LOG.info("\n\nI'm in MID\n\n");
-        lampEventFamily.sendEventToAll(onIEvent);
+//        lampEventFamily.sendEventToAll(onIEvent);
         LOG.info("\n\nI'm in END\n\n");
     }
 
     public void sendTurnEvent(TurnEvent turnEvent) {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-        lampEventFamily.sendEventToAll(turnEvent);
+//        lampEventFamily.sendEventToAll(turnEvent);
     }
 
 
