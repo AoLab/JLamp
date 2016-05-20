@@ -10,13 +10,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-class CustomHttpHandler implements HttpHandler {
+public class CustomHttpHandler implements HttpHandler {
 
     private final Logger LOG = LoggerFactory.getLogger(CustomHttpHandler.class);
     private CustomKaaClient kaaClient;
+    private Request request;
 
-    CustomHttpHandler(CustomKaaClient kaaClient) {
+    public CustomHttpHandler(CustomKaaClient kaaClient, Request request) {
         this.kaaClient = kaaClient;
+        this.request = request;
     }
 
     @Override
@@ -24,12 +26,16 @@ class CustomHttpHandler implements HttpHandler {
 
         String context = exchange.getRequestURI().toString();
 
+        // Interface implementation based:
+        // Response response = request.requestOnSuccess(context);
+        // exchange.sendResponseHeaders(response.getStatusCode(), response.getResponse().length());
+        // exchange.getResponseBody().write(response.getResponse().getBytes());
         switch (context) {
             case "/lamp/turn":
                 try {
+                    kaaClient.sendTurnEvent(Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody())));
                     exchange.sendResponseHeaders(200, Constants.code200.length());
                     exchange.getResponseBody().write(Constants.code200.getBytes());
-                    kaaClient.sendTurnEvent(Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody())));
                 } catch (ParseException e) {
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
@@ -41,11 +47,11 @@ class CustomHttpHandler implements HttpHandler {
                 exchange.getResponseBody().write(Constants.code501.getBytes());
                 break;
             case "/lamp/OnI":
-                exchange.sendResponseHeaders(200, Constants.code200.length());
-                exchange.getResponseBody().write(Constants.code200.getBytes());
                 try {
                     String ans = readFromInputStream(exchange.getRequestBody());
                     kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
+                    exchange.sendResponseHeaders(200, Constants.code200.length());
+                    exchange.getResponseBody().write(Constants.code200.getBytes());
                 } catch (ParseException e) {
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
