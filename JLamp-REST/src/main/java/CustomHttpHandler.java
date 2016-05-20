@@ -10,12 +10,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-public class CustomHttpHandler implements HttpHandler {
+class CustomHttpHandler implements HttpHandler {
 
-    public final Logger LOG = LoggerFactory.getLogger(CustomHttpHandler.class);
+    private final Logger LOG = LoggerFactory.getLogger(CustomHttpHandler.class);
     private CustomKaaClient kaaClient;
 
-    public CustomHttpHandler(CustomKaaClient kaaClient) {
+    CustomHttpHandler(CustomKaaClient kaaClient) {
         this.kaaClient = kaaClient;
     }
 
@@ -43,15 +43,10 @@ public class CustomHttpHandler implements HttpHandler {
             case "/lamp/OnI":
                 exchange.sendResponseHeaders(200, Constants.code200.length());
                 exchange.getResponseBody().write(Constants.code200.getBytes());
-                LOG.info("\n\nIM HERE!!!!!!!!!!!!!!!!!\n\n");
                 try {
-                    LOG.info("\n\nRecieved!!!!!!!!!!!!!!!!!\n\n");
                     String ans = readFromInputStream(exchange.getRequestBody());
-                    LOG.info("\n\n"+ans+"\n\n");
                     kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
-                    LOG.info("\n\nFINALLLLLLLLL\n");
                 } catch (ParseException e) {
-                    LOG.info("\n\nNOT Recieved!!!!!!!!!!!!!!!!!\n\n");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
                     e.printStackTrace();
