@@ -51,6 +51,7 @@ public class CustomHttpHandler implements HttpHandler {
                     exchange.sendResponseHeaders(200, Constants.code200.length());
                     exchange.getResponseBody().write(Constants.code200.getBytes());
                     String ans = readFromInputStream(exchange.getRequestBody());
+                    System.out.println(ans);
                     kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
                 } catch (ParseException e) {
                     exchange.sendResponseHeaders(400, Constants.code400.length());
