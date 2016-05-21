@@ -36,13 +36,15 @@ stackoverflow question. Second Answer :)
 ### On for Interval
 Turn the lamp on for the specified interval
 
-| Parameter  | Value           | Description                   |
-|:----------:|:---------------:|:------------------------------|
-| id         | String two char | the id of the destination lamp|
 
 * URL : /lamp/OnI
 * Method : `POST`
 * JSON params:
+
+| Parameter  | Value           | Description                      |
+|:----------:|:---------------:|:-------------------------------- |
+| id         | String two char | the id of the destination lamp   |
+| command    | Integer         | the interval in which lamp is on |
 
 ## Architecture
 To see the awesome architecture of this project visit [AoLab/Lamp](https://github.com/AoLab/Lamp) 
