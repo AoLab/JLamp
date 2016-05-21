@@ -39,7 +39,7 @@ Turn the lamp on for the specified interval
 * Method : ```POST```
 * JSON params:  
 | Parameter  | Value           | Description                   |
-|------------|-----------------|-------------------------------|
+|:------------:|:-----------------:|:-------------------------------|
 | id         | String two char | the id of the destination lamp|
 
 ## Architecture
