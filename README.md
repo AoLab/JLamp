@@ -32,5 +32,14 @@ In order to fix this problem visit
 [this](http://stackoverflow.com/questions/13155734/eclipse-cant-recognize-com-sun-net-httpserver-httpserver-package)
 stackoverflow question. Second Answer :)
 
+## REST API  
+### On for Interval  
+Turn the lamp on for the specified interval  
+* URL : /lamp/OnI  
+* Method : ```POST```
+* JSON params:
+| Parameter  | Value           | Description                   |
+| id         | String two char | the id of the destination lamp|
+
 ## Architecture
 To see the awesome architecture of this project visit [AoLab/Lamp](https://github.com/AoLab/Lamp) 
