@@ -37,8 +37,9 @@ stackoverflow question. Second Answer :)
 Turn the lamp on for the specified interval  
 * URL : /lamp/OnI  
 * Method : ```POST```
-* JSON params:
+* JSON params:  
 | Parameter  | Value           | Description                   |
+|------------|-----------------|-------------------------------|
 | id         | String two char | the id of the destination lamp|
 
 ## Architecture
