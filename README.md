@@ -35,12 +35,12 @@ stackoverflow question. Second Answer :)
 ## REST API  
 ### On for Interval  
 Turn the lamp on for the specified interval  
-* URL : /lamp/OnI  
-* Method : ```POST```
-* JSON params:  
 | Parameter  | Value           | Description                   |
 |:------------:|:-----------------:|:-------------------------------|
 | id         | String two char | the id of the destination lamp|
+* URL : /lamp/OnI  
+* Method : ```POST```
+* JSON params:  
 
 ## Architecture
 To see the awesome architecture of this project visit [AoLab/Lamp](https://github.com/AoLab/Lamp) 
