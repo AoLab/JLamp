@@ -33,9 +33,9 @@ public class CustomHttpHandler implements HttpHandler {
         switch (context) {
             case "/lamp/turn":
                 try {
-                    kaaClient.sendTurnEvent(Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody())));
                     exchange.sendResponseHeaders(200, Constants.code200.length());
                     exchange.getResponseBody().write(Constants.code200.getBytes());
+                    kaaClient.sendTurnEvent(Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody())));
                 } catch (ParseException e) {
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
@@ -48,10 +48,10 @@ public class CustomHttpHandler implements HttpHandler {
                 break;
             case "/lamp/OnI":
                 try {
-                    String ans = readFromInputStream(exchange.getRequestBody());
-                    kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
                     exchange.sendResponseHeaders(200, Constants.code200.length());
                     exchange.getResponseBody().write(Constants.code200.getBytes());
+                    String ans = readFromInputStream(exchange.getRequestBody());
+                    kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
                 } catch (ParseException e) {
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
