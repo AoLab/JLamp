@@ -13,8 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			HttpServer server = HttpServer.create(new InetSocketAddress("192.168.128.90", 4500), 30);
-
-            server.createContext("/lamp/", new CustomHttpHandler(CustomKaaClient.getKaaClient()));
+			server.createContext("/lamp/", new CustomHttpHandler(CustomKaaClient.getKaaClient(), null));
             server.start();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

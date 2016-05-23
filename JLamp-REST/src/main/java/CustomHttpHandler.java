@@ -12,11 +12,13 @@ import java.io.InputStreamReader;
 
 public class CustomHttpHandler implements HttpHandler {
 
-    public final Logger LOG = LoggerFactory.getLogger(CustomHttpHandler.class);
+    private final Logger LOG = LoggerFactory.getLogger(CustomHttpHandler.class);
     private CustomKaaClient kaaClient;
+    private Request request;
 
-    public CustomHttpHandler(CustomKaaClient kaaClient) {
+    public CustomHttpHandler(CustomKaaClient kaaClient, Request request) {
         this.kaaClient = kaaClient;
+        this.request = request;
     }
 
     @Override
@@ -24,6 +26,10 @@ public class CustomHttpHandler implements HttpHandler {
 
         String context = exchange.getRequestURI().toString();
 
+        // Interface implementation based:
+        // Response response = request.requestOnSuccess(context);
+        // exchange.sendResponseHeaders(response.getStatusCode(), response.getResponse().length());
+        // exchange.getResponseBody().write(response.getResponse().getBytes());
         switch (context) {
             case "/lamp/turn":
                 try {
@@ -41,17 +47,13 @@ public class CustomHttpHandler implements HttpHandler {
                 exchange.getResponseBody().write(Constants.code501.getBytes());
                 break;
             case "/lamp/OnI":
-                exchange.sendResponseHeaders(200, Constants.code200.length());
-                exchange.getResponseBody().write(Constants.code200.getBytes());
-                LOG.info("\n\nIM HERE!!!!!!!!!!!!!!!!!\n\n");
                 try {
-                    LOG.info("\n\nRecieved!!!!!!!!!!!!!!!!!\n\n");
+                    exchange.sendResponseHeaders(200, Constants.code200.length());
+                    exchange.getResponseBody().write(Constants.code200.getBytes());
                     String ans = readFromInputStream(exchange.getRequestBody());
-                    LOG.info("\n\n"+ans+"\n\n");
+                    System.out.println(ans);
                     kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
-                    LOG.info("\n\nFINALLLLLLLLL\n");
                 } catch (ParseException e) {
-                    LOG.info("\n\nNOT Recieved!!!!!!!!!!!!!!!!!\n\n");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
                     e.printStackTrace();

@@ -13,51 +13,65 @@ public class Serial {
     private BufferedReader bufferedReader;
     private static Serial serialInstance;
 
-    private Serial()
-    {
+    private Serial() {
         super();
         serialInstance = this;
     }
 
     public static Serial getSerialInstance() {
-        if(serialInstance == null)
+        if (serialInstance == null)
             new Serial();
         return serialInstance;
     }
 
 
-
-    void connect ( String portName ) throws Exception
-    {
+    void connect(String portName) throws Exception {
         CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
-        if ( portIdentifier.isCurrentlyOwned() )
-        {
+        if (portIdentifier.isCurrentlyOwned()) {
             System.out.println("Error: Port is currently in use");
-        }
-        else
-        {
-            CommPort commPort = portIdentifier.open(this.getClass().getName(),2000);
+        } else {
+            CommPort commPort = portIdentifier.open(this.getClass().getName(), 2000);
 
-            if ( commPort instanceof SerialPort)
-            {
+            if (commPort instanceof SerialPort) {
                 SerialPort serialPort = (SerialPort) commPort;
                 serialPort.setSerialPortParams(115200, SerialPort.DATABITS_8, SerialPort.PARITY_EVEN, SerialPort.FLOWCONTROL_NONE);
-                System.out.println(serialPort.getBaudRate());
 
                 printWriter = new PrintWriter(serialPort.getOutputStream());
-                bufferedReader = new BufferedReader( new InputStreamReader(serialPort.getInputStream()));
-            }
-            else
-            {
+                bufferedReader = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
+
+                bufferedReader.readLine();
+
+                Serial.getSerialInstance().write("L112\n");
+
+                System.out.println(Serial.getSerialInstance().readFromInput());
+                System.out.println(Serial.getSerialInstance().readFromInput());
+                System.out.println(Serial.getSerialInstance().readFromInput());
+                System.out.println(Serial.getSerialInstance().readFromInput());
+
+//                serialPort.notifyOnDataAvailable(true);
+//                serialPort.addEventListener(new SerialEventListener(bufferedReader));
+
+            } else {
                 System.out.println("Error: Only serial ports are handled by this example.");
             }
         }
     }
 
-    public void sendLampCommand(String id, int status) {
-        System.out.println("L" + id + status + '\n');
-        write("L" + id + status + '\n');
 
+
+    public int readStatus() {
+        readFromInput();
+        readFromInput();
+        return 2;
+    }
+
+    public char readFromInput() {
+        try {
+            return (char) bufferedReader.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public void write(String string) {
