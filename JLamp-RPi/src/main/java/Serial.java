@@ -1,6 +1,8 @@
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
@@ -12,6 +14,8 @@ public class Serial {
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
     private static Serial serialInstance;
+    private static final Logger LOG = LoggerFactory.getLogger(Serial.class);
+
 
     private Serial() {
         super();
@@ -57,7 +61,12 @@ public class Serial {
         }
     }
 
+    public void sendLampCommand(String id, int status) {
+        String command = "L" + id + status + '\n';
+        write(command);
+        LOG.info("Sent lamp command " + command);
 
+    }
 
     public int readStatus() {
         readFromInput();
