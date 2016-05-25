@@ -1,1 +1,3 @@
 rootProject.name = 'JLamp'
+
+include "JLamp-RPi", "JLamp-REST"
