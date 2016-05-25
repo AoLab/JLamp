@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile group: 'org.rxtx', name: 'rxtx', version: '2.1.7'
+}
+
