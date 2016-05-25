@@ -48,7 +48,8 @@ fabric.properties
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-# *.iml
+*.iml
+.idea
 # modules.xml
 # Created by https://www.gitignore.io/api/gradle
 
@@ -67,3 +68,10 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+
+
+# Kaa files
+key.private
+key.public
+state.properties
+state.properties_bckp
