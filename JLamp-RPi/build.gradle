@@ -2,13 +2,20 @@ apply plugin: 'java'
 
 repositories {
     mavenCentral()
-        flatDir {
-            dirs 'libs'
-        }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile group: 'org.rxtx', name: 'rxtx', version: '2.1.7'
+}
+
+task execute(type :JavaExec) {
+    classpath  sourceSets.main.runtimeClasspath
+    jvmArgs '-Djava.library.path=/usr/lib/rxtx:/usr/lib/jni'
+    jvmArgs '-Dgnu.io.rxtx.SerialPorts="/dev/ttyACM0"'
+    main = 'Main'
 }
 
