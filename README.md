@@ -2,8 +2,6 @@
 ## Introduction
 Java implementation of the Lamp project.
 
-**Note** that when running the above command the current directory must be the same as the generated sdk.
-
 ## JLamp - REST
 ### Introduction
 This project contains web service functions required for turning the lamps on and off.
