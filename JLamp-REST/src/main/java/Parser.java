@@ -51,6 +51,7 @@ public class Parser {
         try {
             id = (String) jsonObject.get("id");
             status = (Boolean) jsonObject.get("status");
+            System.out.println(status);
             LOG.info("Parsed!!");
         } catch (Exception exception) {
             LOG.info("Parse exception");
