@@ -45,8 +45,16 @@ public class Parser {
             turnEvent = null;
             return turnEvent;
         }
-        String id = (String) jsonObject.get("id");
-        Boolean status = (Boolean) jsonObject.get("status");
+        String id;
+        Boolean status;
+        try {
+            id = (String) jsonObject.get("id");
+            status = (Boolean) jsonObject.get("status");
+        } catch (Exception exception) {
+            LOG.info("Parse exception");
+            turnEvent = null;
+            return turnEvent;
+        }
         turnEvent = new TurnEvent(id, status);
         LOG.info("Parse success!");
         return turnEvent;
