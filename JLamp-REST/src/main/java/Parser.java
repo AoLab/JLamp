@@ -19,7 +19,7 @@ public class Parser {
         try {
             jsonObject = (JSONObject) parser.parse(input);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOG.info("Parse exception");
             onIEvent = null;
             return onIEvent;
         }
@@ -38,6 +38,7 @@ public class Parser {
         try {
             jsonObject = (JSONObject) parser.parse(input);
         } catch (ParseException e) {
+            LOG.info("Parse exception");
             turnEvent = null;
             return turnEvent;
         }
