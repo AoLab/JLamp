@@ -1,5 +1,6 @@
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import ir.ac.aut.ceit.aolab.OnIEvent;
 import ir.ac.aut.ceit.aolab.TurnEvent;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
@@ -33,37 +34,31 @@ public class CustomHttpHandler implements HttpHandler {
         // exchange.getResponseBody().write(response.getResponse().getBytes());
         switch (context) {
             case "/lamp/turn":
-                try {
-                    TurnEvent turnEvent = Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody()));
-                    if(turnEvent == null) {
-                        exchange.sendResponseHeaders(400, Constants.code400.length());
-                        exchange.getResponseBody().write(Constants.code400.getBytes());
-                    }
-                    exchange.sendResponseHeaders(200, Constants.code200.length());
-                    exchange.getResponseBody().write(Constants.code200.getBytes());
-                    kaaClient.sendTurnEvent(turnEvent);
-                } catch (ParseException e) {
+                TurnEvent turnEvent = Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody()));
+                if(turnEvent == null) {
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
-                    e.printStackTrace();
+                    break;
                 }
+                exchange.sendResponseHeaders(200, Constants.code200.length());
+                exchange.getResponseBody().write(Constants.code200.getBytes());
+                kaaClient.sendTurnEvent(turnEvent);
                 break;
             case "/lamp/list":
                 exchange.sendResponseHeaders(501, Constants.code501.length());
                 exchange.getResponseBody().write(Constants.code501.getBytes());
                 break;
             case "/lamp/OnI":
-                try {
-                    exchange.sendResponseHeaders(200, Constants.code200.length());
-                    exchange.getResponseBody().write(Constants.code200.getBytes());
-                    String ans = readFromInputStream(exchange.getRequestBody());
-                    System.out.println(ans);
-                    kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
-                } catch (ParseException e) {
+                String ans = readFromInputStream(exchange.getRequestBody());
+                OnIEvent onIEvent = null;
+                onIEvent = Parser.getOnIEvent(ans);
+                if(onIEvent == null) {
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
-                    e.printStackTrace();
                 }
+                exchange.sendResponseHeaders(200, Constants.code200.length());
+                exchange.getResponseBody().write(Constants.code200.getBytes());
+                kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
                 break;
             default:
                 exchange.sendResponseHeaders(404, Constants.code404.length());

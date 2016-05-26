@@ -3,16 +3,26 @@ import ir.ac.aut.ceit.aolab.TurnEvent;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by iman on 4/27/16.
  */
 public class Parser {
-    public static OnIEvent getOnIEvent(String input) throws ParseException {
+    private static final Logger LOG = LoggerFactory.getLogger(Parser.class);
+    public static OnIEvent getOnIEvent(String input) {
         JSONParser parser = new JSONParser();
 
         OnIEvent onIEvent;
-        JSONObject jsonObject = (JSONObject) parser.parse(input);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = (JSONObject) parser.parse(input);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            onIEvent = null;
+            return onIEvent;
+        }
         String id = (String) jsonObject.get("id");
         System.out.println(id);
         long interval = (long) jsonObject.get("command");
@@ -22,11 +32,17 @@ public class Parser {
         return onIEvent;
     }
 
-    public static TurnEvent getTurnEvent(String input) throws ParseException {
+    public static TurnEvent getTurnEvent(String input) {
         JSONParser parser = new JSONParser();
 
         TurnEvent turnEvent;
-        JSONObject jsonObject = (JSONObject) parser.parse(input);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = (JSONObject) parser.parse(input);
+        } catch (ParseException e) {
+            turnEvent = null;
+            return turnEvent;
+        }
         String id = (String) jsonObject.get("id");
         Boolean status = (Boolean) jsonObject.get("status");
         turnEvent = new TurnEvent(id, status);
