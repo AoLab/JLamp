@@ -16,7 +16,5 @@ dependencies {
 task execute(type: JavaExec) {
     classpath sourceSets.main.runtimeClasspath
     main = 'Main'
-
-    print jvmArgs
 }
 
