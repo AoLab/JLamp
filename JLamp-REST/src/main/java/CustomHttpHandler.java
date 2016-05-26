@@ -1,5 +1,6 @@
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import ir.ac.aut.ceit.aolab.TurnEvent;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +34,14 @@ public class CustomHttpHandler implements HttpHandler {
         switch (context) {
             case "/lamp/turn":
                 try {
+                    TurnEvent turnEvent = Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody()));
+                    if(turnEvent == null) {
+                        exchange.sendResponseHeaders(400, Constants.code400.length());
+                        exchange.getResponseBody().write(Constants.code400.getBytes());
+                    }
                     exchange.sendResponseHeaders(200, Constants.code200.length());
                     exchange.getResponseBody().write(Constants.code200.getBytes());
-                    kaaClient.sendTurnEvent(Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody())));
+                    kaaClient.sendTurnEvent(turnEvent);
                 } catch (ParseException e) {
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
