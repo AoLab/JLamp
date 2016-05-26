@@ -31,11 +31,22 @@ repositories {
 
 
 task getKaaLibrary {
-    def client = new RESTClient('http://iot.ceit.aut.ac.ir:58902/')
-    def resp = client.get(path: '')
+    def user = "parham"
+    def pass = "Parham13730321"
+    def client = new RESTClient('http://' + user + ':' + pass + '@' + 'iot.ceit.aut.ac.ir:58902/')
+    def resp = null
+    try {
+        resp = client.post(path: '/kaaAdmin/rest/api/sdk?sdkProfileId={sdkProfileId}&targetPlatform=JAVA')
+    }
+    catch (ex) {
+        println ex
+        println "Kaa Library Get was Failed."
+        return
+    }
 
     assert resp.status == 200  // HTTP response code; 404 means not found, etc.
-    println resp.getData()
+    def sdkWriter = new FileOutputStream("libs/kaa-java-sdk-rpi.jar")
+    sdkWriter.newPrintWriter().write(resp.getData())
 }
 
 task execute(type: JavaExec) {
