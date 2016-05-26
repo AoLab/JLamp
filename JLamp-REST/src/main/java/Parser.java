@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 public class Parser {
     private static final Logger LOG = LoggerFactory.getLogger(Parser.class);
     public static OnIEvent getOnIEvent(String input) {
+        LOG.info("Parsing .......");
         JSONParser parser = new JSONParser();
 
         OnIEvent onIEvent;
@@ -27,10 +28,12 @@ public class Parser {
         long interval = (long) jsonObject.get("command");
         int intVersion = Math.toIntExact(interval);
         onIEvent = new OnIEvent(id, intVersion);
+        LOG.info("Parse success!");
         return onIEvent;
     }
 
     public static TurnEvent getTurnEvent(String input) {
+        LOG.info("Parsing .......");
         JSONParser parser = new JSONParser();
 
         TurnEvent turnEvent;
@@ -45,6 +48,7 @@ public class Parser {
         String id = (String) jsonObject.get("id");
         Boolean status = (Boolean) jsonObject.get("status");
         turnEvent = new TurnEvent(id, status);
+        LOG.info("Parse success!");
         return turnEvent;
     }
 }
