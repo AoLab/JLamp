@@ -34,8 +34,10 @@ public class CustomHttpHandler implements HttpHandler {
         // exchange.getResponseBody().write(response.getResponse().getBytes());
         switch (context) {
             case "/lamp/turn":
+                LOG.info("Received /lamp/turn");
                 TurnEvent turnEvent = Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody()));
                 if(turnEvent == null) {
+                    LOG.info("Malformatted json");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
                     break;
@@ -43,6 +45,7 @@ public class CustomHttpHandler implements HttpHandler {
                 exchange.sendResponseHeaders(200, Constants.code200.length());
                 exchange.getResponseBody().write(Constants.code200.getBytes());
                 kaaClient.sendTurnEvent(turnEvent);
+                LOG.info("Successfuly sent an event");
                 break;
             case "/lamp/list":
                 exchange.sendResponseHeaders(501, Constants.code501.length());
@@ -53,12 +56,15 @@ public class CustomHttpHandler implements HttpHandler {
                 OnIEvent onIEvent = null;
                 onIEvent = Parser.getOnIEvent(ans);
                 if(onIEvent == null) {
+                    LOG.info("Malformatted json");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
+                    break;
                 }
                 exchange.sendResponseHeaders(200, Constants.code200.length());
                 exchange.getResponseBody().write(Constants.code200.getBytes());
                 kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
+                LOG.info("Successfuly sent an event");
                 break;
             default:
                 exchange.sendResponseHeaders(404, Constants.code404.length());
@@ -85,6 +91,8 @@ public class CustomHttpHandler implements HttpHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        LOG.info("Received " + ans + " body string.");
         return ans;
     }
 
