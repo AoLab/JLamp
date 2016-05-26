@@ -27,6 +27,7 @@ public class Parser {
         String id = (String) jsonObject.get("id");
         long interval = (long) jsonObject.get("command");
         int intVersion = Math.toIntExact(interval);
+        LOG.info("Parsed!!");
         onIEvent = new OnIEvent(id, intVersion);
         LOG.info("Parse success!");
         return onIEvent;
@@ -50,6 +51,7 @@ public class Parser {
         try {
             id = (String) jsonObject.get("id");
             status = (Boolean) jsonObject.get("status");
+            LOG.info("Parsed!!");
         } catch (Exception exception) {
             LOG.info("Parse exception");
             turnEvent = null;
