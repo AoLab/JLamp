@@ -51,9 +51,10 @@ public class Parser {
         try {
             id = (String) jsonObject.get("id");
             status = (Boolean) jsonObject.get("status");
-            System.out.println(status);
-            LOG.info("Parsed!!");
-        } catch (Exception exception) {
+            if(id == null || status == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException exception) {
             LOG.info("Parse exception");
             turnEvent = null;
             return turnEvent;
