@@ -24,8 +24,19 @@ public class Parser {
             onIEvent = null;
             return onIEvent;
         }
-        String id = (String) jsonObject.get("id");
-        long interval = (long) jsonObject.get("command");
+        String id = null;
+        Long interval = null;
+        try {
+            id = (String) jsonObject.get("id");
+            interval = (Long) jsonObject.get("command");
+            if(id == null || interval == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            LOG.info("Parse exception");
+            onIEvent = null;
+            return onIEvent;
+        }
         int intVersion = Math.toIntExact(interval);
         LOG.info("Parsed!!");
         onIEvent = new OnIEvent(id, intVersion);
