@@ -6,13 +6,10 @@ apply plugin: 'maven'
 buildscript {
     repositories {
         mavenCentral()
-        maven {
-            url "http://repository.codehaus.org"
-        }
     }
 
     dependencies {
-        classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.5.2'
+        classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.7'
     }
 }
 
