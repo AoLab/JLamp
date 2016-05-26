@@ -1,4 +1,26 @@
+import groovyx.net.http.RESTClient
+
 apply plugin: 'java'
+apply plugin: 'maven'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://repository.codehaus.org"
+        }
+    }
+
+    dependencies {
+        classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.5.2'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile group: 'org.rxtx', name: 'rxtx', version: '2.1.7'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
+}
 
 repositories {
     mavenCentral()
@@ -7,10 +29,13 @@ repositories {
     }
 }
 
-dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile group: 'org.rxtx', name: 'rxtx', version: '2.1.7'
-    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
+
+task getKaaLibrary {
+    def client = new RESTClient('http://iot.ceit.aut.ac.ir:58902/')
+    def resp = client.get(path: '')
+
+    assert resp.status == 200  // HTTP response code; 404 means not found, etc.
+    println resp.getData()
 }
 
 task execute(type: JavaExec) {
