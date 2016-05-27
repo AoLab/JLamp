@@ -50,7 +50,7 @@ task getKaaLibrary {
             id = o.id
         }
     }
-    logger.info("Lamp-RPi Application ID: " + id)
+    logger.quiet("Lamp-RPi Application ID: ${id}")
 
     /* Find Profile SDK ID */
     String sdk
@@ -65,10 +65,10 @@ task getKaaLibrary {
     assert profileSdks.status == 200
     assert profileSdks.getData() instanceof List
     sdk = ((List) profileSdks.getData()).last().id
-    logger.info("Lamp-RPi Last Profile SDK ID: " + sdk)
+    logger.quiet("Lamp-RPi Last Profile SDK ID: ${sdk}")
 
     /* Get SDK for Java :) */
-    def data = null
+    def data
     try {
         data = client.post(path: '/kaaAdmin/rest/api/sdk',
                 query: [sdkProfileId: sdk, targetPlatform: 'JAVA'])
