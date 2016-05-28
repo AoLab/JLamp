@@ -1,3 +1,5 @@
+package ir.ac.aut.ceit.aolab.jlamp.rpi.serial;
+
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 

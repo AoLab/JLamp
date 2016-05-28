@@ -1,7 +1,9 @@
+package ir.ac.aut.ceit.aolab.jlamp.rpi.model;
+
+import ir.ac.aut.ceit.aolab.jlamp.rpi.serial.Serial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
