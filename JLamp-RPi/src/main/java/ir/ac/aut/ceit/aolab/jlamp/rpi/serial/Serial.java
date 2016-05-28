@@ -6,7 +6,10 @@ import gnu.io.SerialPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 /**
  * Created by iman on 5/9/16.
@@ -34,7 +37,7 @@ public class Serial {
 	public void connect(String portName) throws Exception {
 		CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
 		if (portIdentifier.isCurrentlyOwned()) {
-			System.out.println("Error: Port is currently in use");
+			LOG.error("Port is currently in use");
 		} else {
 			CommPort commPort = portIdentifier.open(this.getClass().getName(), 2000);
 
@@ -55,7 +58,7 @@ public class Serial {
 				System.out.println(Serial.getSerialInstance().readFromInput());
 
 			} else {
-				System.out.println("Error: Only serial ports are handled by this example.");
+				LOG.error("Only serial ports are handled by this example.");
 			}
 		}
 	}
