@@ -8,17 +8,17 @@ import ir.ac.aut.ceit.aolab.TurnEvent;
 public class CustomEventListener implements LampEventFamily.Listener {
     @Override
     public void onEvent(TurnEvent turnEvent, String s) {
-        Serial.getSerialInstance().sendLampCommand(turnEvent.getId(), turnEvent.getStatus() ? 1 : 0);
+        Lamp.getLampById(turnEvent.getId()).sendLampCommand(turnEvent.getStatus() ? 1 : 0);
     }
 
     @Override
     public void onEvent(OnIEvent onIEvent, String s) {
-        Serial.getSerialInstance().sendLampCommand(onIEvent.getId(), 1);
+        Lamp.getLampById(onIEvent.getId()).sendLampCommand(1);
         try {
             Thread.sleep(onIEvent.getCommand()*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Serial.getSerialInstance().sendLampCommand(onIEvent.getId(), 0);
+        Lamp.getLampById(onIEvent.getId()).sendLampCommand(0);
     }
 }

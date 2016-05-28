@@ -26,4 +26,11 @@ public class Lamp {
         LOG.info("Sent lamp command " + command);
 
     }
+
+    public static Lamp getLampById(String id) {
+        if(lampDatabase.containsKey(id))
+            return lampDatabase.get(id);
+        else
+            return new Lamp(id);
+    }
 }

@@ -52,20 +52,10 @@ public class Serial {
                 System.out.println(Serial.getSerialInstance().readFromInput());
                 System.out.println(Serial.getSerialInstance().readFromInput());
 
-//                serialPort.notifyOnDataAvailable(true);
-//                serialPort.addEventListener(new SerialEventListener(bufferedReader));
-
             } else {
                 System.out.println("Error: Only serial ports are handled by this example.");
             }
         }
-    }
-
-    public void sendLampCommand(String id, int status) {
-        String command = "L" + id + status + '\n';
-        write(command);
-        LOG.info("Sent lamp command " + command);
-
     }
 
     public int readStatus() {
