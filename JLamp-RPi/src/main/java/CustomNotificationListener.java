@@ -7,13 +7,13 @@ import org.kaaproject.kaa.client.notification.NotificationListener;
 public class CustomNotificationListener implements NotificationListener {
     @Override
     public void onNotification(long l, lamp_notification lamp_notification) {
-        Serial.getSerialInstance().sendLampCommand(lamp_notification.getId(), 1);
+        Lamp.getLampById(lamp_notification.getId()).sendLampCommand(1);
         try {
             Thread.sleep(lamp_notification.getInterval() * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        Serial.getSerialInstance().sendLampCommand(lamp_notification.getId(), 0);
+        Lamp.getLampById(lamp_notification.getId()).sendLampCommand(0);
     }
 }
