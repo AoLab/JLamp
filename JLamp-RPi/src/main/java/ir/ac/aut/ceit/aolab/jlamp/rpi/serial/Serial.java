@@ -36,10 +36,12 @@ public class Serial {
 
 	public void connect(String portName) throws Exception {
 		CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
+		LOG.info("Found the " + portName + " port.");
 		if (portIdentifier.isCurrentlyOwned()) {
 			LOG.error("Port is currently in use");
 		} else {
 			CommPort commPort = portIdentifier.open(this.getClass().getName(), 2000);
+			LOG.info("Opened port " + portName);
 
 			if (commPort instanceof SerialPort) {
 				SerialPort serialPort = (SerialPort) commPort;
@@ -48,25 +50,10 @@ public class Serial {
 				printWriter = new PrintWriter(serialPort.getOutputStream());
 				bufferedReader = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
 
-				bufferedReader.readLine();
-
-				Serial.getSerialInstance().write("L112\n");
-
-				System.out.println(Serial.getSerialInstance().readFromInput());
-				System.out.println(Serial.getSerialInstance().readFromInput());
-				System.out.println(Serial.getSerialInstance().readFromInput());
-				System.out.println(Serial.getSerialInstance().readFromInput());
-
 			} else {
 				LOG.error("Only serial ports are handled by this example.");
 			}
 		}
-	}
-
-	public int readStatus() {
-		readFromInput();
-		readFromInput();
-		return 2;
 	}
 
 	public char readFromInput() {
