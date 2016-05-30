@@ -44,6 +44,7 @@ public class KaaController {
 			LOG.error(sw.toString());
 		}
 
+		start();
 		EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
 		LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
 		lampEventFamily.addListener(new DefaultEventListener());
