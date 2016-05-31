@@ -44,20 +44,18 @@ public class KaaController {
 			LOG.error(sw.toString());
 		}
 
-		start();
+	}
+
+	public void start() {
+		kaaClient.start();
 		EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
 		LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
 		lampEventFamily.addListener(new DefaultEventListener());
 
 		kaaClient.attachUser("userExternalId",
-			"userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
+				"userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
 
 		kaaClient.addNotificationListener(new DefaultNotificationListener());
-
-	}
-
-	public void start() {
-		kaaClient.start();
 	}
 
 	public static KaaController getInstance() {
