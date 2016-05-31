@@ -1,5 +1,6 @@
 import ir.ac.aut.ceit.aolab.LampEventFamily;
 import ir.ac.aut.ceit.aolab.jlamp.OnIEvent;
+import ir.ac.aut.ceit.aolab.jlamp.PIREventClassFamily;
 import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
 import ir.ac.aut.ceit.aolab.jlamp.TurnEvent;
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
@@ -73,4 +74,9 @@ public class CustomKaaClient {
     }
 
 
+    public void sendPIRStatusEvent(ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent pirStatusEvent) {
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        PIREventClassFamily pirEventFamily = eventFamilyFactory.getPIREventClassFamily();
+        pirEventFamily.sendEventToAll(pirStatusEvent);
+    }
 }

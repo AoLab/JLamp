@@ -107,4 +107,32 @@ public class Parser {
         LOG.info("Parse success!");
         return statusEvent;
     }
+    public static ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent getPIRStatusEvent(String input) {
+        LOG.info("Parsing .......");
+        JSONParser parser = new JSONParser();
+
+        ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent statusEvent;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = (JSONObject) parser.parse(input);
+        } catch (ParseException e) {
+            LOG.info("Parse exception");
+            statusEvent = null;
+            return statusEvent;
+        }
+        String id;
+        try {
+            id = (String) jsonObject.get("id");
+            if(id == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException exception) {
+            LOG.info("Parse exception");
+            statusEvent = null;
+            return statusEvent;
+        }
+        statusEvent = new ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent(id);
+        LOG.info("Parse success!");
+        return statusEvent;
+    }
 }

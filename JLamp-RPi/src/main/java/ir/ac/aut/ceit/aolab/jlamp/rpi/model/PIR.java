@@ -36,9 +36,16 @@ public class PIR {
         // Format of answer is #(4)
         serial.readChar(); // Skipping #
         serial.readChar(); // Skipping (
-        int lightness = serial.readChar();
-        serial.readChar(); // Skipping )
 
-        return lightness;
+        String numberToBeConverted = null;
+        while(true) {
+            char c = serial.readChar();
+            if(c == ')')
+                break;
+            else
+                numberToBeConverted += c;
+        }
+
+        return Integer.parseInt(numberToBeConverted);
     }
 }
