@@ -89,16 +89,19 @@ public class Serial {
 
 	public void write(String string) {
 		printWriter.write(string);
+        LOG.info("Wrote string " + string + " to serial");
 		printWriter.flush();
 	}
 
 	public void close() throws IOException {
 		printWriter.close();
 		bufferedReader.close();
+        LOG.info("Serial link was closed");
 	}
 
     public void skipInput() {
         readLine();
+        LOG.info("Successfully skipped one line");
     }
 
 }
