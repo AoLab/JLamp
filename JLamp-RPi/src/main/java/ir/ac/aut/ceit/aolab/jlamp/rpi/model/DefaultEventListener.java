@@ -41,7 +41,7 @@ public class DefaultEventListener implements LampEventFamily.Listener, PIREventC
 		LOG.info("Received status event");
 		Boolean status = Lamp.getLampById(statusEvent.getId()).getLampStatus();
         StatusEvent statusEventResponse = new StatusEvent(status ? "true" : "false");
-        KaaController.getInstance().sendLampStatusEvent(statusEventResponse);
+        KaaController.getInstance().sendStatusEvent(statusEventResponse);
 	}
 
     @Override
@@ -49,7 +49,7 @@ public class DefaultEventListener implements LampEventFamily.Listener, PIREventC
         LOG.info("Received status event");
         int status = PIR.getbyId(statusEvent.getId()).getStatus();
         ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent statusEventResponse = new ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent(String.valueOf(status));
-        KaaController.getInstance().sendLampStatusEvent(statusEventResponse);
+        KaaController.getInstance().sendPIRStatusEvent(statusEventResponse);
 
     }
 }
