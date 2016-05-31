@@ -1,4 +1,6 @@
 import ir.ac.aut.ceit.aolab.LampEventFamily;
+import ir.ac.aut.ceit.aolab.jlamp.OnIEvent;
+import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
 import ir.ac.aut.ceit.aolab.jlamp.TurnEvent;
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
@@ -51,10 +53,23 @@ public class CustomKaaClient {
         return instance;
     }
 
+    public void sendOnIEvent(OnIEvent onIEvent) {
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
+        lampEventFamily.sendEventToAll(onIEvent);
+    }
+
     public void sendTurnEvent(TurnEvent turnEvent) {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
         lampEventFamily.sendEventToAll(turnEvent);
+    }
+
+    public void sendStatusEvent(StatusEvent statusEvent) {
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
+        lampEventFamily.sendEventToAll(statusEvent);
+
     }
 
 
