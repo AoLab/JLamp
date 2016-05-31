@@ -35,4 +35,17 @@ public class Lamp {
         else
             return new Lamp(id);
     }
+
+    public boolean getLampStatus(){
+        String command = identifier + id + '2' + '\n';
+        serial.write(command);
+        LOG.info("Sent lamp command " + command);
+
+        serial.readChar(); // Skipping #
+        serial.readChar(); // Skipping (
+        boolean status = serial.readChar() == 1 ? true : false;
+        serial.readChar(); // Skipping )
+
+        return status;
+    }
 }

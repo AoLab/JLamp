@@ -50,6 +50,9 @@ public class Serial {
 				printWriter = new PrintWriter(serialPort.getOutputStream());
 				bufferedReader = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
 
+                // For skipping AnA string
+                skipInput();
+
 			} else {
 				LOG.error("Only serial ports are handled by this example.");
 			}
