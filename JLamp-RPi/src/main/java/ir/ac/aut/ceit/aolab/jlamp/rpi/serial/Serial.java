@@ -70,12 +70,21 @@ public class Serial {
 
     public String readLine() {
         try {
-            return (String) bufferedReader.readLine();
+            return bufferedReader.readLine();
         } catch (IOException e) {
             LOG.error("Failed to read a line.");
         }
         return null;
 
+    }
+
+    public int readInt() {
+        try {
+            return  Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+            LOG.error("Failed to read a line.");
+        }
+        return -1;
     }
 
 	public void write(String string) {
