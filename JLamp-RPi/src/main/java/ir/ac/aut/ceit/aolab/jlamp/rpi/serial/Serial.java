@@ -101,7 +101,9 @@ public class Serial {
 
     public void skipInput() {
         readChar();
+        LOG.info("Skipped one char");
         readChar();
+        LOG.info("Skipped two char");
         readChar();
         LOG.info("Successfully skipped one line");
     }
