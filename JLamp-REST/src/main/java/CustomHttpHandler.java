@@ -64,14 +64,14 @@ public class CustomHttpHandler implements HttpHandler {
                 }
                 exchange.sendResponseHeaders(200, Constants.code200.length());
                 exchange.getResponseBody().write(Constants.code200.getBytes());
-                kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
+                kaaClient.sendOnIEvent(onIEvent);
                 LOG.info("Successfuly sent an event");
                 break;
             case "lamp/status":
-                String ans = readFromInputStream(exchange.getRequestBody());
+                ans = readFromInputStream(exchange.getRequestBody());
                 StatusEvent statusEvent = null;
-                onIEvent = Parser.getOnIEvent(ans);
-                if(onIEvent == null) {
+                statusEvent = Parser.getStatusEvent(ans);
+                if(statusEvent == null) {
                     LOG.info("Malformatted json");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
@@ -79,9 +79,8 @@ public class CustomHttpHandler implements HttpHandler {
                 }
                 exchange.sendResponseHeaders(200, Constants.code200.length());
                 exchange.getResponseBody().write(Constants.code200.getBytes());
-                kaaClient.sendOnIEvent(Parser.getOnIEvent(ans));
+                kaaClient.sendStatusEvent(statusEvent);
                 LOG.info("Successfuly sent an event");
-                break;
                 break;
             default:
                 exchange.sendResponseHeaders(404, Constants.code404.length());
