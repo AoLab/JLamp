@@ -56,14 +56,24 @@ public class Serial {
 		}
 	}
 
-	public char readFromInput() {
+	public char readChar() {
 		try {
 			return (char) bufferedReader.read();
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error("Failed to read a char.");
 		}
 		return 0;
 	}
+
+    public String readLine() {
+        try {
+            return (String) bufferedReader.readLine();
+        } catch (IOException e) {
+            LOG.error("Failed to read a line.");
+        }
+        return null;
+
+    }
 
 	public void write(String string) {
 		printWriter.write(string);
@@ -74,5 +84,9 @@ public class Serial {
 		printWriter.close();
 		bufferedReader.close();
 	}
+
+    public void skipInput() {
+        readLine();
+    }
 
 }
