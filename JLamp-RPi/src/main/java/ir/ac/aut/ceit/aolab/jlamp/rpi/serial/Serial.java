@@ -100,7 +100,9 @@ public class Serial {
 	}
 
     public void skipInput() {
-        readLine();
+        readChar();
+        readChar();
+        readChar();
         LOG.info("Successfully skipped one line");
     }
 
