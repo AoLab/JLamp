@@ -1,6 +1,7 @@
 package ir.ac.aut.ceit.aolab.jlamp.rpi.controller;
 
 import ir.ac.aut.ceit.aolab.LampEventFamily;
+import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultEventListener;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultNotificationListener;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.Lamp;
@@ -66,6 +67,10 @@ public class KaaController {
 			instance = new KaaController();
 
 		return instance;
+	}
+
+	public void sendLampStatusEvent(StatusEvent statusEvent) {
+		sendLampStatusEvent(statusEvent);
 	}
 
 

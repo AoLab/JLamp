@@ -29,10 +29,11 @@ public class PIR {
     }
 
     public int getStatus(){
-        String command = identifier + id + '2' + '\n';
+        String command = identifier + id + '\n';
         serial.write(command);
         LOG.info("Sent PIR command " + command);
 
+        // Format of answer is #(4)
         serial.readChar(); // Skipping #
         serial.readChar(); // Skipping (
         int lightness = serial.readChar();
