@@ -3,6 +3,7 @@ package ir.ac.aut.ceit.aolab.jlamp.rpi.controller;
 import ir.ac.aut.ceit.aolab.LampEventFamily;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultEventListener;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultNotificationListener;
+import ir.ac.aut.ceit.aolab.jlamp.rpi.model.Lamp;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.serial.Serial;
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
@@ -56,6 +57,8 @@ public class KaaController {
 				"userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
 
 		kaaClient.addNotificationListener(new DefaultNotificationListener());
+
+		System.out.println(Lamp.getLampById("11").getLampStatus());
 	}
 
 	public static KaaController getInstance() {
