@@ -73,6 +73,7 @@ public class CustomHttpHandler implements HttpHandler {
                 exchange.getResponseBody().close();
                 break;
             case "/lamp/status":
+                LOG.info("Received /lamp/status");
                 ans = readFromInputStream(exchange.getRequestBody());
                 StatusEvent statusEvent = null;
                 statusEvent = Parser.getStatusEvent(ans);
