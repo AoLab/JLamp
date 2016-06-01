@@ -53,6 +53,8 @@ public class KaaController {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
         lampEventFamily.addListener(new DefaultEventListener());
+        PIREventClassFamily pirEventClassFamily = eventFamilyFactory.getPIREventClassFamily();
+        pirEventClassFamily.addListener(new DefaultEventListener());
 
         kaaClient.attachUser("userExternalId",
                 "userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
