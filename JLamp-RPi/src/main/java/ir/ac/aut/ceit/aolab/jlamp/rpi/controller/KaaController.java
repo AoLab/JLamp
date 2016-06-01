@@ -37,7 +37,7 @@ public class KaaController {
 
 		try {
 			LOG.info("Trying to connect to serial ...");
-			Serial.getSerialInstance().connect("/dev/ttyACM0");
+			Serial.getSerialInstance().connect("/dev/ttyACM1");
 			LOG.info("Serial connection was successful");
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
