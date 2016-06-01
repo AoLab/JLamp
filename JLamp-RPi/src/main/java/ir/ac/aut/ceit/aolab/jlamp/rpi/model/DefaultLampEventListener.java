@@ -14,9 +14,9 @@ import static ir.ac.aut.ceit.aolab.jlamp.rpi.model.Lamp.getLampById;
 /**
  * Created by root on 5/17/16.
  */
-public class DefaultEventListener implements LampEventFamily.Listener, PIREventClassFamily.Listener {
+public class DefaultLampEventListener implements LampEventFamily.Listener {
 
-	private static final Logger LOG = LoggerFactory.getLogger(DefaultEventListener.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultLampEventListener.class);
 
 	@Override
 	public void onEvent(TurnEvent turnEvent, String s) {
@@ -44,12 +44,4 @@ public class DefaultEventListener implements LampEventFamily.Listener, PIREventC
         KaaController.getInstance().sendStatusEvent(statusEventResponse);
 	}
 
-    @Override
-    public void onEvent(ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent statusEvent, String s) {
-        LOG.info("Received status of pir event");
-        int status = PIR.getbyId(statusEvent.getId()).getStatus();
-        ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent statusEventResponse = new ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent(String.valueOf(status));
-        KaaController.getInstance().sendPIRStatusEvent(statusEventResponse);
-
-    }
 }

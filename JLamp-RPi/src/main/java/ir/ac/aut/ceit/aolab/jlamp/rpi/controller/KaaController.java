@@ -3,9 +3,9 @@ package ir.ac.aut.ceit.aolab.jlamp.rpi.controller;
 import ir.ac.aut.ceit.aolab.LampEventFamily;
 import ir.ac.aut.ceit.aolab.jlamp.PIREventClassFamily;
 import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
-import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultEventListener;
+import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultLampEventListener;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultNotificationListener;
-import ir.ac.aut.ceit.aolab.jlamp.rpi.model.Lamp;
+import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultPIREventListener;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.serial.Serial;
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
@@ -52,9 +52,9 @@ public class KaaController {
         kaaClient.start();
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-        lampEventFamily.addListener(new DefaultEventListener());
+        lampEventFamily.addListener(new DefaultLampEventListener());
         PIREventClassFamily pirEventClassFamily = eventFamilyFactory.getPIREventClassFamily();
-        pirEventClassFamily.addListener(new DefaultEventListener());
+        pirEventClassFamily.addListener(new DefaultPIREventListener());
 
         kaaClient.attachUser("userExternalId",
                 "userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
