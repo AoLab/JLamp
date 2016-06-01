@@ -59,7 +59,6 @@ public class KaaController {
 
         kaaClient.addNotificationListener(new DefaultNotificationListener());
 
-        System.out.println(Lamp.getLampById("11").getLampStatus());
     }
 
     public static KaaController getInstance() {
