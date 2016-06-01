@@ -34,6 +34,10 @@ public class CustomKaaClient {
 
         });
 
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
+        lampEventFamily.addListener(new DefaultLampEventListener());
+
         kaaClient.start();
 
         kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
