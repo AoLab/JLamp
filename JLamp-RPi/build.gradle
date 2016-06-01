@@ -85,7 +85,7 @@ repositories {
 task execute(type: JavaExec) {
     classpath sourceSets.main.runtimeClasspath
     jvmArgs = ["-Djava.library.path=/usr/lib/rxtx:/usr/lib/jni"]
-    systemProperty 'gnu.io.rxtx.SerialPorts', '/dev/ttyACM1'
+    systemProperty 'gnu.io.rxtx.SerialPorts', '/dev/ttyACM0'
     main = 'ir.ac.aut.ceit.aolab.jlamp.rpi.main.Main'
 
     print jvmArgs
