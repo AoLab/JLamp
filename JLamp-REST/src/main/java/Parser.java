@@ -1,5 +1,6 @@
-import ir.ac.aut.ceit.aolab.OnIEvent;
-import ir.ac.aut.ceit.aolab.TurnEvent;
+import ir.ac.aut.ceit.aolab.jlamp.OnIEvent;
+import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
+import ir.ac.aut.ceit.aolab.jlamp.TurnEvent;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -11,6 +12,9 @@ import org.slf4j.LoggerFactory;
  */
 public class Parser {
     private static final Logger LOG = LoggerFactory.getLogger(Parser.class);
+
+
+    @Deprecated
     public static OnIEvent getOnIEvent(String input) {
         LOG.info("Parsing .......");
         JSONParser parser = new JSONParser();
@@ -28,7 +32,7 @@ public class Parser {
         Long interval = null;
         try {
             id = (String) jsonObject.get("id");
-            interval = (Long) jsonObject.get("command");
+            interval = (Long) jsonObject.get("status");
             if(id == null || interval == null) {
                 throw new NullPointerException();
             }
@@ -73,5 +77,62 @@ public class Parser {
         turnEvent = new TurnEvent(id, status);
         LOG.info("Parse success!");
         return turnEvent;
+    }
+
+    public static StatusEvent getStatusEvent(String input) {
+        LOG.info("Parsing .......");
+        JSONParser parser = new JSONParser();
+
+        StatusEvent statusEvent;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = (JSONObject) parser.parse(input);
+        } catch (ParseException e) {
+            LOG.info("Parse exception");
+            statusEvent = null;
+            return statusEvent;
+        }
+        String id;
+        try {
+            id = (String) jsonObject.get("id");
+            if(id == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException exception) {
+            LOG.info("Parse exception");
+            statusEvent = null;
+            return statusEvent;
+        }
+        statusEvent = new StatusEvent(id);
+        LOG.info("Parse success!");
+        return statusEvent;
+    }
+    public static ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent getPIRStatusEvent(String input) {
+        LOG.info("Parsing .......");
+        JSONParser parser = new JSONParser();
+
+        ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent statusEvent;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = (JSONObject) parser.parse(input);
+        } catch (ParseException e) {
+            LOG.info("Parse exception");
+            statusEvent = null;
+            return statusEvent;
+        }
+        String id;
+        try {
+            id = (String) jsonObject.get("id");
+            if(id == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException exception) {
+            LOG.info("Parse exception");
+            statusEvent = null;
+            return statusEvent;
+        }
+        statusEvent = new ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent(id);
+        LOG.info("Parse success!");
+        return statusEvent;
     }
 }

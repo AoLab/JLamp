@@ -1,6 +1,8 @@
 package ir.ac.aut.ceit.aolab.jlamp.rpi.controller;
 
 import ir.ac.aut.ceit.aolab.LampEventFamily;
+import ir.ac.aut.ceit.aolab.jlamp.PIREventClassFamily;
+import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultEventListener;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultNotificationListener;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.Lamp;
@@ -21,19 +23,19 @@ import java.io.StringWriter;
  */
 public class KaaController {
 
-	private static KaaController instance;
-	private final Logger LOG = LoggerFactory.getLogger(KaaController.class);
-	private KaaClient kaaClient;
+    private static KaaController instance;
+    private final Logger LOG = LoggerFactory.getLogger(KaaController.class);
+    private KaaClient kaaClient;
 
-	private KaaController() {
-		kaaClient = Kaa.newClient(new DesktopKaaPlatformContext(), new SimpleKaaClientStateListener() {
-			@Override
-			public void onStarted() {
-				super.onStarted();
-				LOG.info("Kaa Client Started!");
-			}
+    private KaaController() {
+        kaaClient = Kaa.newClient(new DesktopKaaPlatformContext(), new SimpleKaaClientStateListener() {
+            @Override
+            public void onStarted() {
+                super.onStarted();
+                LOG.info("Kaa Client Started!");
+            }
 
-		});
+        });
 
 		try {
 			LOG.info("Trying to connect to serial ...");
@@ -44,29 +46,42 @@ public class KaaController {
 			e.printStackTrace(new PrintWriter(sw));
 			LOG.error(sw.toString());
 		}
+    }
 
-	}
+    public void start() {
+        kaaClient.start();
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
+        lampEventFamily.addListener(new DefaultEventListener());
 
-	public void start() {
-		kaaClient.start();
-		EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
-		LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-		lampEventFamily.addListener(new DefaultEventListener());
+        kaaClient.attachUser("userExternalId",
+                "userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
 
-		kaaClient.attachUser("userExternalId",
-				"userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
+        kaaClient.addNotificationListener(new DefaultNotificationListener());
 
-		kaaClient.addNotificationListener(new DefaultNotificationListener());
+        System.out.println(Lamp.getLampById("11").getLampStatus());
+    }
 
-		System.out.println(Lamp.getLampById("11").getLampStatus());
-	}
+    public static KaaController getInstance() {
+        if (instance == null)
+            instance = new KaaController();
 
-	public static KaaController getInstance() {
-		if (instance == null)
-			instance = new KaaController();
+        return instance;
+    }
 
-		return instance;
-	}
+    public void sendStatusEvent(StatusEvent statusEvent) {
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
+        lampEventFamily.sendEventToAll(statusEvent);
+
+    }
+
+
+    public void sendPIRStatusEvent(ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent pirStatusEvent) {
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        PIREventClassFamily pirEventFamily = eventFamilyFactory.getPIREventClassFamily();
+        pirEventFamily.sendEventToAll(pirStatusEvent);
+    }
 
 
 }
