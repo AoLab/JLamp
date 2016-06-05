@@ -48,6 +48,8 @@ public class Lamp {
         LOG.info("Sent lamp command " + command);
 
         char c;
+        c = serial.readChar(); // Skipping $
+        LOG.info("Received char " + c);
         c = serial.readChar(); // Skipping #
         LOG.info("Received char " + c);
         c = serial.readChar(); // Skipping (
