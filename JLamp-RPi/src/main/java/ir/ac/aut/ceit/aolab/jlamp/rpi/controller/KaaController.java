@@ -72,6 +72,8 @@ public class KaaController {
         LOG.info("READLINE " + c);
         c = Serial.getSerialInstance().readChar();
         LOG.info("READLINE " + c);
+        c = Serial.getSerialInstance().readChar();
+        LOG.info("READLINE " + c);
 
     }
 
