@@ -41,9 +41,14 @@ public class Lamp {
         serial.write(command);
         LOG.info("Sent lamp command " + command);
 
-        serial.readChar(); // Skipping #
-        serial.readChar(); // Skipping (
-        boolean status = serial.readChar() == 1 ? true : false;
+        char c;
+        c = serial.readChar(); // Skipping #
+        LOG.info("Received char " + c);
+        c = serial.readChar(); // Skipping (
+        LOG.info("Received char " + c);
+        c = serial.readChar();
+        LOG.info("Received char " + c);
+        boolean status = c == 1 ? true : false;
         LOG.info("Lamp status is " + status);
         serial.readChar(); // Skipping )
 
