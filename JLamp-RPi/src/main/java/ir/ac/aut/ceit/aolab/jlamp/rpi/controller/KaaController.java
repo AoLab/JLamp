@@ -63,8 +63,16 @@ public class KaaController {
                 "userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
 
         kaaClient.addNotificationListener(new DefaultNotificationListener());
-        String begin = Serial.getSerialInstance().readLine();
-        LOG.info("READLINE " + begin);
+        char c;
+        c = Serial.getSerialInstance().readChar();
+        LOG.info("READLINE " + c);
+        c = Serial.getSerialInstance().readChar();
+        LOG.info("READLINE " + c);
+        c = Serial.getSerialInstance().readChar();
+        LOG.info("READLINE " + c);
+        c = Serial.getSerialInstance().readChar();
+        LOG.info("READLINE " + c);
+
     }
 
     public static KaaController getInstance() {
