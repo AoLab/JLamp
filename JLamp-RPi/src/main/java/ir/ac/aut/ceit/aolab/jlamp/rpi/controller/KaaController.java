@@ -56,10 +56,14 @@ public class KaaController {
         PIREventClassFamily pirEventClassFamily = eventFamilyFactory.getPIREventClassFamily();
         pirEventClassFamily.addListener(new DefaultPIREventListener());
 
+
         kaaClient.attachUser("userExternalId",
                 "userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
 
         kaaClient.addNotificationListener(new DefaultNotificationListener());
+
+        char c = Serial.getSerialInstance().readChar();
+        LOG.info("Skipping " + c);
 
     }
 
