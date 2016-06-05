@@ -44,6 +44,7 @@ public class Lamp {
         serial.readChar(); // Skipping #
         serial.readChar(); // Skipping (
         boolean status = serial.readChar() == 1 ? true : false;
+        LOG.info("Lamp status is " + status);
         serial.readChar(); // Skipping )
 
         return status;
