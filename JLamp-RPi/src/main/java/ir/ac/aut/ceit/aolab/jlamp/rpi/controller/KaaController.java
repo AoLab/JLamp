@@ -62,9 +62,6 @@ public class KaaController {
 
         kaaClient.addNotificationListener(new DefaultNotificationListener());
 
-        char c = Serial.getSerialInstance().readChar();
-        LOG.info("Skipping " + c);
-
     }
 
     public static KaaController getInstance() {
