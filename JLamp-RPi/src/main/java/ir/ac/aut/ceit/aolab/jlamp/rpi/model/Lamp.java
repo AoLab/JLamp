@@ -27,6 +27,7 @@ public class Lamp {
         serial.write(command);
         LOG.info("Sent lamp command " + command);
         char c;
+        LOG.info("Starting to receive feed backs...");
         c = serial.readChar();
         LOG.info("Received char " + c);
         c = serial.readChar();
