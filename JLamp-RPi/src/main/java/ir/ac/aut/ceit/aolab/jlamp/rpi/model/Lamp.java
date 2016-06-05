@@ -56,7 +56,7 @@ public class Lamp {
         LOG.info("Received char " + c);
         c = serial.readChar();
         LOG.info("Received char " + c);
-        boolean status = c == 1 ? true : false;
+        boolean status = c == '1' ? true : false;
         LOG.info("Lamp status is " + status);
         c= serial.readChar(); // Skipping )
         LOG.info("Received char " + c);
