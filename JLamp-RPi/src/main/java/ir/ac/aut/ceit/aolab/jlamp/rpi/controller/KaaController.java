@@ -18,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import static ir.ac.aut.ceit.aolab.jlamp.rpi.serial.Serial.getSerialInstance;
+
 /**
  * Created by iman on 4/29/16.
  */
@@ -39,7 +41,7 @@ public class KaaController {
 
 		try {
 			LOG.info("Trying to connect to serial ...");
-			Serial.getSerialInstance().connect("/dev/ttyACM0");
+			getSerialInstance().connect("/dev/ttyACM0");
 			LOG.info("Serial connection was successful");
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -61,7 +63,8 @@ public class KaaController {
                 "userAccessToken", response -> System.out.println("Attach response" + response.getResult()));
 
         kaaClient.addNotificationListener(new DefaultNotificationListener());
-
+        String begin = Serial.getSerialInstance().readLine();
+        LOG.info("READLINE " + begin);
     }
 
     public static KaaController getInstance() {
