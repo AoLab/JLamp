@@ -33,14 +33,18 @@ public class PIR {
         serial.write(command);
         LOG.info("Sent PIR command " + command);
 
-        // Format of answer is #(4)
-        serial.readChar(); // Skipping #
-        serial.readChar(); // Skipping (
+        char c;
+        c = serial.readChar(); // Skipping $
+        LOG.info("Received char " + c);
+        c = serial.readChar(); // Skipping #
+        LOG.info("Received char " + c);
+        c = serial.readChar(); // Skipping (
+        LOG.info("Received char " + c);
 
         String numberToBeConverted = null;
         while(true) {
-            char c = serial.readChar();
-            if(c == ')')
+            char d = serial.readChar();
+            if(d == ')')
                 break;
             else
                 numberToBeConverted += c;

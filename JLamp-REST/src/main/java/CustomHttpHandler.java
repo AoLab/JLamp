@@ -96,7 +96,6 @@ public class CustomHttpHandler implements HttpHandler {
                     exchange.getResponseBody().write(Constants.code400.getBytes());
                     break;
                 }
-                exchange.sendResponseHeaders(200, Constants.code200.length());
                 kaaClient.sendPIRStatusEvent(pirStatusEvent);
                 LOG.info("Successfuly sent an event");
                 break;

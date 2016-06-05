@@ -37,6 +37,8 @@ public class CustomKaaClient {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
         lampEventFamily.addListener(new DefaultLampEventListener());
+        PIREventClassFamily pirEventClassFamily = eventFamilyFactory.getPIREventClassFamily();
+        pirEventClassFamily.addListener(new DefaultPIREventListener());
 
         kaaClient.start();
 
