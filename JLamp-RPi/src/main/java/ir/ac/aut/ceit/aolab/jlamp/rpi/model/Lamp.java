@@ -26,6 +26,11 @@ public class Lamp {
         String command = identifier + id + status + '\n';
         serial.write(command);
         LOG.info("Sent lamp command " + command);
+        char c;
+        c = serial.readChar();
+        LOG.info("Received char " + c);
+        c = serial.readChar();
+        LOG.info("Received char " + c);
 
     }
 
