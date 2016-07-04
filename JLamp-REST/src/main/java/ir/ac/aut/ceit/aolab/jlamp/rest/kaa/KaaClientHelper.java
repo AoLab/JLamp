@@ -62,13 +62,14 @@ public class KaaClientHelper {
 
 	}
 
-	public void sendOnIEvent(OnIEvent onIEvent) {
+	@Deprecated
+	public static void sendOnIEvent(OnIEvent onIEvent) {
 		EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
 		LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
 		lampEventFamily.sendEventToAll(onIEvent);
 	}
 
-	public void sendTurnEvent(TurnEvent turnEvent) {
+	public static void sendTurnEvent(TurnEvent turnEvent) {
 		EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
 		LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
 		lampEventFamily.sendEventToAll(turnEvent);
