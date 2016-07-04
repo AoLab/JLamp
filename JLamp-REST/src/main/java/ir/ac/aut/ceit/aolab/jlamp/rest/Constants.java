@@ -1,3 +1,5 @@
+package ir.ac.aut.ceit.aolab.jlamp.rest;
+
 /**
  * Created by iman on 4/29/16.
  */

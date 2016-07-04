@@ -1,9 +1,10 @@
+package ir.ac.aut.ceit.aolab.jlamp.rest;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import ir.ac.aut.ceit.aolab.jlamp.OnIEvent;
 import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
 import ir.ac.aut.ceit.aolab.jlamp.TurnEvent;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +33,7 @@ public class CustomHttpHandler implements HttpHandler {
         String context = exchange.getRequestURI().toString();
 
         // Interface implementation based:
-        // Response response = request.requestOnSuccess(context);
+        // ir.ac.aut.ceit.aolab.jlamp.rest.Response response = request.requestOnSuccess(context);
         // exchange.sendResponseHeaders(response.getStatusCode(), response.getResponse().length());
         // exchange.getResponseBody().write(response.getResponse().getBytes());
         switch (context) {

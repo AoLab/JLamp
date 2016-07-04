@@ -1,3 +1,5 @@
+package ir.ac.aut.ceit.aolab.jlamp.rest;
+
 import ir.ac.aut.ceit.aolab.LampEventFamily;
 import ir.ac.aut.ceit.aolab.jlamp.OnIEvent;
 import ir.ac.aut.ceit.aolab.jlamp.PIREventClassFamily;
