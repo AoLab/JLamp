@@ -11,7 +11,7 @@ import java.io.IOException;
 public class DefaultLampEventListener implements LampEventFamily.Listener {
     @Override
     public void onEvent(StatusEvent statusEvent, String s) {
-        if(statusEvent.getId().equals("true")) {
+        if (statusEvent.getId().equals("true")) {
             try {
                 String response = "{\"status\":true}";
                 CustomHttpHandler.httpExchange.sendResponseHeaders(200, response.length());
@@ -19,10 +19,9 @@ public class DefaultLampEventListener implements LampEventFamily.Listener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else
+        } else
             try {
-                String response= "{\"status\":false}";
+                String response = "{\"status\":false}";
                 CustomHttpHandler.httpExchange.sendResponseHeaders(200, response.length());
                 CustomHttpHandler.httpExchange.getResponseBody().write(response.getBytes());
             } catch (IOException e) {

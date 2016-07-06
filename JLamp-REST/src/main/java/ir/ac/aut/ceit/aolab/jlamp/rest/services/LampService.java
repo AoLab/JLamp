@@ -18,7 +18,7 @@ import spark.Request;
 import spark.Response;
 
 public interface LampService extends Service {
-	IResponse onTurnRequest(Request request, Response response);
+    IResponse onTurnRequest(Request request, Response response);
 
-	IResponse onStatusRequest(Request request, Response response);
+    IResponse onStatusRequest(Request request, Response response);
 }

@@ -18,8 +18,8 @@ import ir.ac.aut.ceit.aolab.jlamp.rest.services.LampService;
 import spark.Spark;
 
 public class LampRoute {
-	public static void registerRoutes(LampService service) {
-		Spark.post("/lamp/turn", "application/json", service::onTurnRequest, new JsonTransformer());
-		Spark.post("/lamp/status", "application/json", service::onStatusRequest, new JsonTransformer());
-	}
+    public static void registerRoutes(LampService service) {
+        Spark.post("/lamp/turn", "application/json", service::onTurnRequest, new JsonTransformer());
+        Spark.post("/lamp/status", "application/json", service::onStatusRequest, new JsonTransformer());
+    }
 }

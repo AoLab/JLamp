@@ -2,9 +2,11 @@ package ir.ac.aut.ceit.aolab.jlamp.rest;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+
 import ir.ac.aut.ceit.aolab.jlamp.OnIEvent;
 import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
 import ir.ac.aut.ceit.aolab.jlamp.TurnEvent;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,10 +18,10 @@ import java.io.InputStreamReader;
 
 public class CustomHttpHandler implements HttpHandler {
 
+    public static HttpExchange httpExchange;
     private final Logger LOG = LoggerFactory.getLogger(CustomHttpHandler.class);
     private CustomKaaClient kaaClient;
     private Request request;
-    public static HttpExchange httpExchange;
 
     public CustomHttpHandler(CustomKaaClient kaaClient, Request request) {
         this.kaaClient = kaaClient;
@@ -40,7 +42,7 @@ public class CustomHttpHandler implements HttpHandler {
             case "/lamp/turn":
                 LOG.info("Received /lamp/turn");
                 TurnEvent turnEvent = Parser.getTurnEvent(readFromInputStream(exchange.getRequestBody()));
-                if(turnEvent == null) {
+                if (turnEvent == null) {
                     LOG.info("Malformatted json");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
@@ -61,7 +63,7 @@ public class CustomHttpHandler implements HttpHandler {
                 String ans = readFromInputStream(exchange.getRequestBody());
                 OnIEvent onIEvent = null;
                 onIEvent = Parser.getOnIEvent(ans);
-                if(onIEvent == null) {
+                if (onIEvent == null) {
                     LOG.info("Malformatted json");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
@@ -78,7 +80,7 @@ public class CustomHttpHandler implements HttpHandler {
                 ans = readFromInputStream(exchange.getRequestBody());
                 StatusEvent statusEvent = null;
                 statusEvent = Parser.getStatusEvent(ans);
-                if(statusEvent == null) {
+                if (statusEvent == null) {
                     LOG.info("Malformatted json");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());
@@ -91,7 +93,7 @@ public class CustomHttpHandler implements HttpHandler {
                 ans = readFromInputStream(exchange.getRequestBody());
                 ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent pirStatusEvent = null;
                 pirStatusEvent = Parser.getPIRStatusEvent(ans);
-                if(pirStatusEvent == null) {
+                if (pirStatusEvent == null) {
                     LOG.info("Malformatted json");
                     exchange.sendResponseHeaders(400, Constants.code400.length());
                     exchange.getResponseBody().write(Constants.code400.getBytes());

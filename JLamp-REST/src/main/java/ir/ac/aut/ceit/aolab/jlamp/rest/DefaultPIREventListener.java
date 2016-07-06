@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Created by iman on 6/5/16.
  */
-public class DefaultPIREventListener implements PIREventClassFamily.Listener{
+public class DefaultPIREventListener implements PIREventClassFamily.Listener {
     @Override
     public void onEvent(StatusEvent statusEvent, String s) {
         try {

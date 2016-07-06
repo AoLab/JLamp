@@ -19,6 +19,7 @@ import ir.ac.aut.ceit.aolab.jlamp.PIREventClassFamily;
 import ir.ac.aut.ceit.aolab.jlamp.TurnEvent;
 import ir.ac.aut.ceit.aolab.jlamp.rest.DefaultLampEventListener;
 import ir.ac.aut.ceit.aolab.jlamp.rest.DefaultPIREventListener;
+
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
 import org.kaaproject.kaa.client.KaaClient;
@@ -30,48 +31,48 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class KaaClientHelper {
-	private static final Logger LOG = LoggerFactory.getLogger(KaaClientHelper.class);
-	private static KaaClient kaaClient;
+    private static final Logger LOG = LoggerFactory.getLogger(KaaClientHelper.class);
+    private static KaaClient kaaClient;
 
-	public static void initiate() {
+    public static void initiate() {
 
-		kaaClient = Kaa.newClient(new DesktopKaaPlatformContext(), new SimpleKaaClientStateListener() {
-			@Override
-			public void onStarted() {
-				super.onStarted();
-				LOG.info("Kaa Client Started!");
-			}
+        kaaClient = Kaa.newClient(new DesktopKaaPlatformContext(), new SimpleKaaClientStateListener() {
+            @Override
+            public void onStarted() {
+                super.onStarted();
+                LOG.info("Kaa Client Started!");
+            }
 
-		});
+        });
 
-		EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
-		LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-		lampEventFamily.addListener(new DefaultLampEventListener());
-		PIREventClassFamily pirEventClassFamily = eventFamilyFactory.getPIREventClassFamily();
-		pirEventClassFamily.addListener(new DefaultPIREventListener());
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
+        lampEventFamily.addListener(new DefaultLampEventListener());
+        PIREventClassFamily pirEventClassFamily = eventFamilyFactory.getPIREventClassFamily();
+        pirEventClassFamily.addListener(new DefaultPIREventListener());
 
-		kaaClient.start();
+        kaaClient.start();
 
-		kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
-			@Override
-			public void onAttachResult(UserAttachResponse response) {
-				System.out.println("Attach response" + response.getResult());
-			}
-		});
+        kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
+            @Override
+            public void onAttachResult(UserAttachResponse response) {
+                System.out.println("Attach response" + response.getResult());
+            }
+        });
 
 
-	}
+    }
 
-	@Deprecated
-	public static void sendOnIEvent(OnIEvent onIEvent) {
-		EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
-		LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-		lampEventFamily.sendEventToAll(onIEvent);
-	}
+    @Deprecated
+    public static void sendOnIEvent(OnIEvent onIEvent) {
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
+        lampEventFamily.sendEventToAll(onIEvent);
+    }
 
-	public static void sendTurnEvent(TurnEvent turnEvent) {
-		EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
-		LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-		lampEventFamily.sendEventToAll(turnEvent);
-	}
+    public static void sendTurnEvent(TurnEvent turnEvent) {
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
+        lampEventFamily.sendEventToAll(turnEvent);
+    }
 }

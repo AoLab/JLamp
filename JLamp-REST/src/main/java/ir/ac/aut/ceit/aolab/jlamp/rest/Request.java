@@ -5,6 +5,8 @@ package ir.ac.aut.ceit.aolab.jlamp.rest;
  */
 public interface Request {
     String[] requests = {"/lamp/turn", "lamp/OnI", "lamp/list"};
+
     Response requestOnSuccess(String requestMethod);
+
     Response requestOnFailure(String requestMethod);
 }

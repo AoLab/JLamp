@@ -3,6 +3,7 @@ package ir.ac.aut.ceit.aolab.jlamp.rest;
 import ir.ac.aut.ceit.aolab.jlamp.OnIEvent;
 import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
 import ir.ac.aut.ceit.aolab.jlamp.TurnEvent;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -35,7 +36,7 @@ public class Parser {
         try {
             id = (String) jsonObject.get("id");
             interval = (Long) jsonObject.get("status");
-            if(id == null || interval == null) {
+            if (id == null || interval == null) {
                 throw new NullPointerException();
             }
         } catch (NullPointerException e) {
@@ -68,7 +69,7 @@ public class Parser {
         try {
             id = (String) jsonObject.get("id");
             status = (Boolean) jsonObject.get("status");
-            if(id == null || status == null) {
+            if (id == null || status == null) {
                 throw new NullPointerException();
             }
         } catch (NullPointerException exception) {
@@ -97,7 +98,7 @@ public class Parser {
         String id;
         try {
             id = (String) jsonObject.get("id");
-            if(id == null) {
+            if (id == null) {
                 throw new NullPointerException();
             }
         } catch (NullPointerException exception) {
@@ -109,6 +110,7 @@ public class Parser {
         LOG.info("Parse success!");
         return statusEvent;
     }
+
     public static ir.ac.aut.ceit.aolab.jlamp.pir.StatusEvent getPIRStatusEvent(String input) {
         LOG.info("Parsing .......");
         JSONParser parser = new JSONParser();
@@ -125,7 +127,7 @@ public class Parser {
         String id;
         try {
             id = (String) jsonObject.get("id");
-            if(id == null) {
+            if (id == null) {
                 throw new NullPointerException();
             }
         } catch (NullPointerException exception) {

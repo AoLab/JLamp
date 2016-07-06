@@ -14,22 +14,22 @@
 package ir.ac.aut.ceit.aolab.jlamp.rest.kaa;
 
 public class KaaTurnRequest {
-	private String id;
-	private boolean status;
+    private String id;
+    private boolean status;
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public boolean isStatus() {
-		return status;
-	}
+    public boolean isStatus() {
+        return status;
+    }
 
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }
