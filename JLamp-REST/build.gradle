@@ -17,6 +17,6 @@ dependencies {
 
 task execute(type: JavaExec) {
     classpath sourceSets.main.runtimeClasspath
-    main = 'Main'
+    main = 'ir.ac.aut.ceit.aolab.jlamp.rest.Main'
 }
 
