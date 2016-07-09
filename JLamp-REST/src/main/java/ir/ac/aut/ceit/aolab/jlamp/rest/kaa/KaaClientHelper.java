@@ -51,14 +51,12 @@ public class KaaClientHelper {
         PIREventClassFamily pirEventClassFamily = eventFamilyFactory.getPIREventClassFamily();
         pirEventClassFamily.addListener(new DefaultPIREventListener());
 
-        kaaClient.start();
+        new Thread(() -> {
+            kaaClient.start();
+        }).start();
 
-        kaaClient.attachUser("userExternalId", "userAccessToken", new UserAttachCallback() {
-            @Override
-            public void onAttachResult(UserAttachResponse response) {
-                System.out.println("Attach response" + response.getResult());
-            }
-        });
+        kaaClient.attachUser("userExternalId", "userAccessToken",
+                response -> System.out.println("Attach response" + response.getResult()));
 
 
     }
