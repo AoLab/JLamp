@@ -13,5 +13,10 @@
 
 package ir.ac.aut.ceit.aolab.jlamp.rest.services;
 
+import ir.ac.aut.ceit.aolab.jlamp.rest.http.IResponse;
+import spark.Request;
+import spark.Response;
+
 public interface Service {
+    IResponse onBootRequest(Request request, Response response);
 }
