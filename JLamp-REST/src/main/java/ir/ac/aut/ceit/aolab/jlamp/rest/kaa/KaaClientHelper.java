@@ -13,22 +13,20 @@
 
 package ir.ac.aut.ceit.aolab.jlamp.rest.kaa;
 
+import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
+import org.kaaproject.kaa.client.Kaa;
+import org.kaaproject.kaa.client.KaaClient;
+import org.kaaproject.kaa.client.SimpleKaaClientStateListener;
+import org.kaaproject.kaa.client.event.EventFamilyFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ir.ac.aut.ceit.aolab.LampEventFamily;
 import ir.ac.aut.ceit.aolab.jlamp.OnIEvent;
 import ir.ac.aut.ceit.aolab.jlamp.PIREventClassFamily;
 import ir.ac.aut.ceit.aolab.jlamp.TurnEvent;
 import ir.ac.aut.ceit.aolab.jlamp.rest.DefaultLampEventListener;
 import ir.ac.aut.ceit.aolab.jlamp.rest.DefaultPIREventListener;
-
-import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
-import org.kaaproject.kaa.client.Kaa;
-import org.kaaproject.kaa.client.KaaClient;
-import org.kaaproject.kaa.client.SimpleKaaClientStateListener;
-import org.kaaproject.kaa.client.event.EventFamilyFactory;
-import org.kaaproject.kaa.client.event.registration.UserAttachCallback;
-import org.kaaproject.kaa.common.endpoint.gen.UserAttachResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class KaaClientHelper {
     private static final Logger LOG = LoggerFactory.getLogger(KaaClientHelper.class);
