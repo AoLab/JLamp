@@ -33,6 +33,8 @@ public class KaaClientHelper {
     private static KaaClient kaaClient;
 
     public static void initiate() {
+        if (kaaClient != null)
+            return;
 
         kaaClient = Kaa.newClient(new DesktopKaaPlatformContext(), new SimpleKaaClientStateListener() {
             @Override
