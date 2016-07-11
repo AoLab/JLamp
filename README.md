@@ -40,6 +40,17 @@ Turn the lamp on or off generally (No interval specified)
 | id         | String[2] | the id of the destination lamp    |
 | status     | Boolean   | `true` for on and `false` for off |
 
+- Success response
+: Code: 200
+- Error response
+:
+
+    |   Status codes       |              Description               |
+    |:--------------------:|:-------------------------------------- |
+    |  400 Bad Request     | The specified parameters are not valid |
+    |  404 Not Found       | The specified path was not found       |
+    |  501 Not Implemented | The specified method was not valid     |
+
 ### Boot Request
 Boot the system and connect 18.20-Plug into Kaa
 
@@ -51,5 +62,29 @@ Boot the system and connect 18.20-Plug into Kaa
 ### Status Request
 Get status of Lamp
 
-## Architecture
-To see the awesome architecture of this project visit [AoLab/Lamp](https://github.com/AoLab/Lamp) 
+- URL
+: /lamp/status
+- Method
+: `POST`
+- JSON params
+:
+
+    | Parameter |   Value  |              Description               |
+    |:---------:|:--------:|:-------------------------------------- |
+    |     id    |  string  | Target lamp identificaiton             |
+
+- Success response
+: Code: 200
+- Error response
+:
+
+    |   Status codes       |              Description               |
+    |:--------------------:|:-------------------------------------- |
+    |  400 Bad Request     | The specified parameters are not valid |
+    |  404 Not Found       | The specified path was not found       |
+    |  501 Not Implemented | The specified method was not valid     |
+
+## Contributors
+* [Prof. Bahador Bakhshi](http://ceit.aut.ac.ir/~bakhshis/)
+* [Parham Alvani](http://1995parham.github.io/)
+* [Iman Tabrizian](https://github.com/Tabrizian)
