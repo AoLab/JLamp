@@ -7,7 +7,7 @@ import spark.Spark;
 public class Main {
 
     public static void main(String[] args) {
-        Spark.port(4500);
+        Spark.port(35000);
         LampRoute.registerRoutes(new KaaLampService());
     }
 
