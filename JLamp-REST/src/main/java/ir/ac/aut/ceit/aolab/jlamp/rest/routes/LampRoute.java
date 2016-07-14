@@ -22,5 +22,6 @@ public class LampRoute {
         Spark.post("/lamp/boot", "application/json", service::onBootRequest, new JsonTransformer());
         Spark.post("/lamp/turn", "application/json", service::onTurnRequest, new JsonTransformer());
         Spark.post("/lamp/status", "application/json", service::onStatusRequest, new JsonTransformer());
+        Spark.post("/lamp/oni", "application/json", service::onOniRequest, new JsonTransformer());
     }
 }

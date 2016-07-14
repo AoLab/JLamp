@@ -66,6 +66,11 @@ public class KaaLampService implements LampService {
     }
 
     @Override
+    public IResponse onOniRequest(Request request, Response response) {
+        return null;
+    }
+
+    @Override
     public IResponse onBootRequest(Request request, Response response) {
         KaaClientHelper.initiate();
         IResponse iResponse = new IResponse();

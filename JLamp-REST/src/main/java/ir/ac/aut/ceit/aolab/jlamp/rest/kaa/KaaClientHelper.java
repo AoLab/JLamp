@@ -25,8 +25,6 @@ import ir.ac.aut.ceit.aolab.LampEventFamily;
 import ir.ac.aut.ceit.aolab.jlamp.OnIEvent;
 import ir.ac.aut.ceit.aolab.jlamp.PIREventClassFamily;
 import ir.ac.aut.ceit.aolab.jlamp.TurnEvent;
-import ir.ac.aut.ceit.aolab.jlamp.rest.DefaultLampEventListener;
-import ir.ac.aut.ceit.aolab.jlamp.rest.DefaultPIREventListener;
 
 public class KaaClientHelper {
     private static final Logger LOG = LoggerFactory.getLogger(KaaClientHelper.class);
