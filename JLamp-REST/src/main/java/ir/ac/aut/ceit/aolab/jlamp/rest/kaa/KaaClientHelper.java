@@ -13,6 +13,7 @@
 
 package ir.ac.aut.ceit.aolab.jlamp.rest.kaa;
 
+import ir.ac.aut.ceit.aolab.jlamp.StatusEvent;
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
 import org.kaaproject.kaa.client.KaaClient;
@@ -70,5 +71,11 @@ public class KaaClientHelper {
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
         lampEventFamily.sendEventToAll(turnEvent);
+    }
+
+    public static void sendStatusEvent(StatusEvent statusEvent) {
+        EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
+        LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
+        lampEventFamily.sendEventToAll(statusEvent);
     }
 }
