@@ -45,9 +45,9 @@ public class KaaClientHelper {
 
         EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
         LampEventFamily lampEventFamily = eventFamilyFactory.getLampEventFamily();
-        lampEventFamily.addListener(new DefaultLampEventListener());
+        lampEventFamily.addListener(new KaaLampEventListener());
         PIREventClassFamily pirEventClassFamily = eventFamilyFactory.getPIREventClassFamily();
-        pirEventClassFamily.addListener(new DefaultPIREventListener());
+        pirEventClassFamily.addListener(new KaaPIREventListener());
 
         new Thread(() -> {
             kaaClient.start();
