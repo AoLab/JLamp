@@ -1,6 +1,7 @@
 package ir.ac.aut.ceit.aolab.jlamp.rpi.controller;
 
 
+import ir.ac.aut.ceit.aolab.I1820.log.states;
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
 import org.kaaproject.kaa.client.KaaClient;
@@ -71,14 +72,10 @@ public class KaaController {
             public void onLogDeliveryTimeout(BucketInfo bucketInfo) { /* Called on timeout */ }
         });
 
-        I1820.Builder logRecord = I1820.newBuilder();
-        logRecord.setId(1);
-        logRecord.setStates(null);
-        logRecord.setType("Funny");
-
         // Push the record to the collector
-        RecordFuture logDeliveryStatus = kaaClient.addLogRecord(logRecord.build());
+        RecordFuture logDeliveryStatus = kaaClient.addLogRecord(RecordWrapper.newBuilder().setRecordData(new I1820(1, "Salam", new states(24))).build());
         // Get log delivery information
+
         try {
             RecordInfo logDeliveryReport = logDeliveryStatus.get();
         } catch (InterruptedException e) {
