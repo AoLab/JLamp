@@ -13,6 +13,7 @@ import org.kaaproject.kaa.client.logging.RecordInfo;
 import org.kaaproject.kaa.client.logging.future.RecordFuture;
 import org.kaaproject.kaa.log.RecordWrapper;
 import org.kaaproject.kaa.schema.base.Log;
+import org.kaaproject.kaa.server.common.log.shared.avro.gen.RecordHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,7 @@ import java.util.concurrent.ExecutionException;
 import ir.ac.aut.ceit.aolab.I1820.log.I1820;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultNotificationListener;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.serial.Serial;
+import org.slf4j.event.Level;
 
 import static ir.ac.aut.ceit.aolab.jlamp.rpi.serial.Serial.getSerialInstance;
 
@@ -73,7 +75,9 @@ public class KaaController {
         });
 
         // Push the record to the collector
-        RecordFuture logDeliveryStatus = kaaClient.addLogRecord(RecordWrapper.newBuilder().setRecordData(new I1820(1, "Salam", new states(24))).build());
+        I1820 i1820 = new I1820(12, "Salam", new states(24));
+
+        RecordFuture logDeliveryStatus = kaaClient.addLogRecord(new RecordWrapper(new RecordHeader(), i1820));
         // Get log delivery information
 
         try {
