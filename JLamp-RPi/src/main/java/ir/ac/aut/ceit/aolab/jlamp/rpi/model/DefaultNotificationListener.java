@@ -1,6 +1,6 @@
 package ir.ac.aut.ceit.aolab.jlamp.rpi.model;
 
-import ir.ac.aut.ceit.aolab.lamp_notification;
+import ir.ac.aut.ceit.aolab.LampInterval;
 import org.kaaproject.kaa.client.notification.NotificationListener;
 
 /**
@@ -8,14 +8,7 @@ import org.kaaproject.kaa.client.notification.NotificationListener;
  */
 public class DefaultNotificationListener implements NotificationListener {
 	@Override
-	public void onNotification(long l, lamp_notification lamp_notification) {
-		Lamp.getLampById(lamp_notification.getId()).sendLampCommand(1);
-		try {
-			Thread.sleep(lamp_notification.getInterval() * 1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	public void onNotification(long l, LampInterval lampInterval) {
 
-		Lamp.getLampById(lamp_notification.getId()).sendLampCommand(0);
 	}
 }
