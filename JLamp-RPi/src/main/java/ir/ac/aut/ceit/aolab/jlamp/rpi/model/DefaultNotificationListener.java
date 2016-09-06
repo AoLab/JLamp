@@ -10,6 +10,6 @@ import org.kaaproject.kaa.client.notification.NotificationListener;
 public class DefaultNotificationListener implements NotificationListener {
     @Override
     public void onNotification(long l, I1820 i1820) {
-
     }
+
 }

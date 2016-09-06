@@ -1,15 +1,25 @@
 package ir.ac.aut.ceit.aolab.jlamp.rpi.controller;
 
+
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
 import org.kaaproject.kaa.client.KaaClient;
 import org.kaaproject.kaa.client.SimpleKaaClientStateListener;
+import org.kaaproject.kaa.client.logging.BucketInfo;
+import org.kaaproject.kaa.client.logging.LogDeliveryListener;
+import org.kaaproject.kaa.client.logging.LogRecord;
+import org.kaaproject.kaa.client.logging.RecordInfo;
+import org.kaaproject.kaa.client.logging.future.RecordFuture;
+import org.kaaproject.kaa.log.RecordWrapper;
+import org.kaaproject.kaa.schema.base.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.concurrent.ExecutionException;
 
+import ir.ac.aut.ceit.aolab.I1820.log.I1820;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.model.DefaultNotificationListener;
 import ir.ac.aut.ceit.aolab.jlamp.rpi.serial.Serial;
 
@@ -49,18 +59,33 @@ public class KaaController {
         kaaClient.start();
 
         kaaClient.addNotificationListener(new DefaultNotificationListener());
-        char c;
-        c = Serial.getSerialInstance().readChar();
-        LOG.info("READLINE " + c);
-        c = Serial.getSerialInstance().readChar();
-        LOG.info("READLINE " + c);
-        c = Serial.getSerialInstance().readChar();
-        LOG.info("READLINE " + c);
-        c = Serial.getSerialInstance().readChar();
-        LOG.info("READLINE " + c);
-        c = Serial.getSerialInstance().readChar();
-        LOG.info("READLINE " + c);
 
+        kaaClient.setLogDeliveryListener(new LogDeliveryListener() {
+            @Override
+            public void onLogDeliverySuccess(BucketInfo bucketInfo) { /* Called on success */ }
+
+            @Override
+            public void onLogDeliveryFailure(BucketInfo bucketInfo) { /* Called on failure */ }
+
+            @Override
+            public void onLogDeliveryTimeout(BucketInfo bucketInfo) { /* Called on timeout */ }
+        });
+
+        I1820.Builder logRecord = I1820.newBuilder();
+        logRecord.setId(1);
+        logRecord.setStates(null);
+        logRecord.setType("Funny");
+
+        // Push the record to the collector
+        RecordFuture logDeliveryStatus = kaaClient.addLogRecord(logRecord.build());
+        // Get log delivery information
+        try {
+            RecordInfo logDeliveryReport = logDeliveryStatus.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     public static KaaController getInstance() {
@@ -70,3 +95,4 @@ public class KaaController {
         return instance;
     }
 }
+

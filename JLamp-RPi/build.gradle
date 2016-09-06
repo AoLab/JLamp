@@ -1,8 +1,5 @@
-import groovyx.net.http.RESTClient
-import groovyx.net.http.HttpResponseDecorator
-
 apply plugin: 'java'
-apply plugin: 'maven'
+
 
 buildscript {
     repositories {
@@ -10,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.7'
+
     }
 }
 
@@ -27,60 +24,6 @@ repositories {
     }
 }
 
-
-//task getKaaLibrary {
-//    def user = "parham"
-//    def pass = "Parham13730321"
-//    def client = new RESTClient("http://${user}:${pass}@iot.ceit.aut.ac.ir:58902/")
-//
-//    /* Find Application ID */
-//    String id = ""
-//    HttpResponseDecorator applications;
-//    try {
-//        applications = (HttpResponseDecorator) client.get(path: '/kaaAdmin/rest/api/applications')
-//    }
-//    catch (ex) {
-//        logger.log(LogLevel.ERROR, 'Kaa Application ID Getting was Faild: ' + ex)
-//        return
-//    }
-//    assert applications.status == 200
-//    assert applications.getData() instanceof List
-//    applications.getData().find { o ->
-//        if (o.name == 'Lamp-RPi') {
-//            id = o.id
-//        }
-//    }
-//    logger.quiet("Lamp-RPi Application ID: ${id}")
-//
-//    /* Find Profile SDK ID */
-//    String sdk
-//    HttpResponseDecorator profileSdks;
-//    try {
-//        profileSdks = (HttpResponseDecorator) client.get(path: "/kaaAdmin/rest/api/sdkProfiles/${id}")
-//    }
-//    catch (ex) {
-//        logger.log(LogLevel.ERROR, 'Kaa Profile SDK ID Getting was Faild: ' + ex)
-//        return
-//    }
-//    assert profileSdks.status == 200
-//    assert profileSdks.getData() instanceof List
-//    sdk = ((List) profileSdks.getData()).last().id
-//    logger.quiet("Lamp-RPi Last Profile SDK ID: ${sdk}")
-//
-//    /* Get SDK for Java :) */
-//    def data
-//    try {
-//        data = client.post(path: '/kaaAdmin/rest/api/sdk',
-//                query: [sdkProfileId: sdk, targetPlatform: 'JAVA'])
-//    }
-//    catch (ex) {
-//        logger.log(LogLevel.ERROR, 'Kaa SDK Getting was Faild: ' + ex)
-//        return
-//    }
-//    assert data.status == 200
-//    def sdkWriter = new FileOutputStream("libs/kaa-java-sdk-rpi.jar")
-//    sdkWriter.newPrintWriter().write(data.getData())
-//}
 
 task execute(type: JavaExec) {
     classpath sourceSets.main.runtimeClasspath
