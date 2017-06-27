@@ -1,8 +1,7 @@
-![Lamp Project Logo](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Logo.png)
 # 18.20 Plug
 ## Introduction
 This project contains web service functions required for turning the lamps on and off.
-![18.20 Plug Architecture](http://aolab.github.io/documentation/architecture/18.20-Plug.jpg)
+
 ## How to ...
 ### Note for eclipse users
 Because this project uses oracle sun related java packages it's access by default
@@ -83,6 +82,7 @@ Get status of Lamp
     |  400 Bad Request     | The specified parameters are not valid |
     |  404 Not Found       | The specified path was not found       |
     |  501 Not Implemented | The specified method was not valid     |
+
 
 ## Contributors
 * [Prof. Bahador Bakhshi](http://ceit.aut.ac.ir/~bakhshis/)
